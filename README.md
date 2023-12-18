@@ -2,8 +2,8 @@
 
 Team:
 
-* Person 1 - Which microservice?
-* Person 2 - Which microservice?
+* Jeremy Kilcrease - Sales microservice
+* Mazen Balasta - Service microservice
 
 ## Design
 
