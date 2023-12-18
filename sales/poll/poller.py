@@ -16,7 +16,8 @@ from sales_rest.models import AutomobileVO
 
 
 def get_automobiles():
-    response = requests.get("http://inventory-api:8000/api/automobiles/")
+    response = requests.get("http://project-beta-inventory-api-1:8000"
+                            "/api/automobiles/")
     content = json.loads(response.content)
     print(content)
     for automobile in content["autos"]:
@@ -30,7 +31,8 @@ def get_automobiles():
 def poll(repeat=True):
     while True:
         print('Sales poller polling for data')
-        response = requests.get("http://inventory-api:8000/api/automobiles/")
+        response = requests.get("http://project-beta-inventory-api-1:8000"
+                                "/api/automobiles/")
         content = json.loads(response.content)
         print(content["autos"])
         try:
@@ -38,7 +40,7 @@ def poll(repeat=True):
         except Exception as e:
             print(e, file=sys.stderr)
 
-        if (not repeat):
+        if not repeat:
             break
 
         time.sleep(60)
