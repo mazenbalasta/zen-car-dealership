@@ -29,7 +29,8 @@ class AppointmentListEncoder(ModelEncoder):
         "customer",
         "date_time",
         "technician",
-        "reason"
+        "reason",
+        "id"
     ]
     encoders = {
         "technician": TechnicianDetailEncoder(),

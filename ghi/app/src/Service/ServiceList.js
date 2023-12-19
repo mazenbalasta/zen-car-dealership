@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 
 function ServiceAppointmentList () {
-    const [appointments, setAppointments] = useState([])
+    const [appointments, setAppointments] = useState([]);
+    const [automobiles, setAutomobiles] = useState([]);
 
     const getData = async () => {
         const response = await fetch('http://localhost:8080/api/appointments/');
@@ -11,29 +12,49 @@ function ServiceAppointmentList () {
             setAppointments(data.appointments);
             console.log(data)
         }
+
+        const automobileResponse = await fetch('http://localhost:8100/api/automobiles/');
+        if (automobileResponse.ok) {
+          const automobiles = await automobileResponse.json();
+          setAutomobiles(automobiles.autos);
+          console.log(automobiles)
+        }
     }
 
     useEffect(() => {
         getData()
     }, []);
 
+    const isVip = (vin) => {
+      const autosVin = automobiles.map(auto => auto.vin);
+      return autosVin.includes(vin);
+    };
+
     const formatDateTime = (dateTime) => {
-        const formattedDate = new Date(dateTime).toLocaleDateString('en-US', {
-          year: 'numeric',
-          month: '2-digit',
-          day: '2-digit',
-        });
+      const formattedDate = new Date(dateTime).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+      });
 
-        const formattedTime = new Date(dateTime).toLocaleTimeString('en-US', {
-          hour: '2-digit',
-          minute: '2-digit',
-          hour12: true,
-        });
+      const formattedTime = new Date(dateTime).toLocaleTimeString('en-US', {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true,
+      });
 
-        return { formattedDate, formattedTime };
-      };
+      return { formattedDate, formattedTime };
+    };
 
+    const handleFinish = async (id) => {
+      const request = await fetch(`http://localhost:8080/api/appointments/${id}/finish/`, {method: "PUT"});
+      getData();
+    }
 
+    const handleCancel = async (id) => {
+      const request = await fetch(`http://localhost:8080/api/appointments/${id}/cancel/`, {method: "PUT"});
+      getData();
+    }
 
     return(
         <>
@@ -59,12 +80,14 @@ function ServiceAppointmentList () {
               return (
                 <tr key={appointment.href}>
                   <td>{ appointment.vin }</td>
-                  <td>{ appointment.vin }</td>
+                  <td>{ isVip(appointment.vin) ? 'Yes' : 'No' }</td>
                   <td>{ appointment.customer }</td>
                   <td>{ formattedDate }</td>
                   <td>{ formattedTime }</td>
                   <td>{ technicianFullName }</td>
                   <td>{ appointment.reason }</td>
+                  <td><button className="btn btn-success" onClick={() => {handleFinish(appointment.id)}}>Finish</button></td>
+                  <td><button className="btn btn-danger" onClick={() => {handleCancel(appointment.id)}}>Cancel</button></td>
                 </tr>
               );
             })}

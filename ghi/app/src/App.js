@@ -94,8 +94,8 @@ function App() {
       <Nav />
       <div className="container">
         <Routes>
-          {/* <Route path="/" element={<MainPage />} />
-          <Route path="manufacturers">
+          <Route path="/" element={<MainPage />} />
+          {/* <Route path="manufacturers">
             <Route path="" element={<ManufacturerList />} />
             <Route path="new" element={<ManufacturerForm />} />
           </Route>
