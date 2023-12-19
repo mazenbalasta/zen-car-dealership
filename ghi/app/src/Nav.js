@@ -15,11 +15,11 @@ function Nav() {
                 Inventory
               </a>
               <ul className="dropdown-menu" aria-labelledby='navbarDarkDropdownMenuLink'>
-                <li><Link to="/models" className="dropdown-item">Vehicle Model List</Link></li>
-                <li><Link to="/models/new" className="dropdown-item">Create a Vehicle Model</Link></li>
-                <li><Link to="automobiles/" className="dropdown-item">List of Automobiles</Link></li>
-                <li><Link to="automobiles/new" className="dropdown-item">Create an Automobile</Link></li>
-                <li><Link to="/manufacturers" className="dropdown-item">Manufacturers List</Link></li>
+                <li><Link to="models/list" className="dropdown-item">Models</Link></li>
+                <li><Link to="models/create/" className="dropdown-item">Create a Model</Link></li>
+                <li><Link to="automobiles/list" className="dropdown-item">Automobiles</Link></li>
+                <li><Link to="automobiles/create/" className="dropdown-item">Create an Automobile</Link></li>
+                <li><Link to="manufacturers/list" className="dropdown-item">Manufacturers</Link></li>
                 <li><Link to="/manufacturers/new" className="dropdown-item">Create a Manufacturer</Link></li>
               </ul>
             </li>
