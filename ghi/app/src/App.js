@@ -26,23 +26,6 @@ function App() {
       <div className="container">
         <Routes>
           <Route path="/" element={<MainPage />} />
-<<<<<<< HEAD
-          {/* <Route path="manufacturers">
-            <Route path="" element={<ManufacturerList />} />
-            <Route path="new" element={<ManufacturerForm />} />
-          </Route>
-          <Route path="models/">
-            <Route path="" element={<VehicleModelList models={models} />} />
-            <Route path="new/" element={<VehicleModelForm fetchModels={fetchModels} />} />
-          </Route>
-          <Route path="/automobiles/" element={<AutomobileList />} /> */}
-          {/* <Route path="/automobiles/new" element={<AutomobileForm />} /> */}
-          <Route path="/sales/new" element={<NewSale automobiles={automobiles} salespersons={salespersons} customers={customers} fetchSales={fetchSales} />} />
-          <Route path="/sales" element={<ListSales sales={sales} />} />
-          <Route path="/salesperson/new" element={<NewSalesPerson salespersons={salespersons} fetchSalesperson={fetchSalesperson} />} />
-          <Route path="/customer/new" element={<NewCustomer customers={customers} fetchCustomer={fetchCustomer} />} />
-          <Route path="/salesperson/sales" element={<ListSalesPersonsSales salespersons={salespersons} sales={sales} />} />
-=======
           <Route path="customers/list/" element={<ListCustomers />} />
           <Route path="customers/" element={<CustomerForm />} />
           <Route path="salespeople/list/" element={<ListSalesPeople />} />
@@ -52,7 +35,6 @@ function App() {
           {/* <Route path="models/create/" element={<VehicleModelForm />} />
           <Route path="manufacturers/create/" element={<ManufacturerForm />} />
           <Route path="automobiles/create/" element={<AutomobileForm />} />
->>>>>>> sales
           <Route path="/technicians" element={<TechnicianList />} />
           <Route path="/technicians/new" element={<NewTechnicianForm />} />
           <Route path="/appointments" element={<ServiceAppointmentList />} />
