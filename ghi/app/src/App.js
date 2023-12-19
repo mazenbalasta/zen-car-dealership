@@ -11,11 +11,10 @@ import SalesPersonForm from './Sales/SalesPersonForm';
 // import ManufacturersList from './Inventory/ManufacturesList';
 // import AutomobileList from './Inventory/AutomobileList';
 // import ModelsList from './Inventory/ModelList';
-// import TechnicianForm from './Service/AddTechnicianForm';
-// import TechnicianList from './Service/ListTechnicians';
-// import AppointmentForm from './Service/CreateApptForm';
-// import AppointmentList from './Service/ListServiceAppts';
-// import AppointmentHistoryList from './Service/ListServiceHistory';
+import TechnicianList from './Service/TechnicianList';
+import NewTechnicianForm from './Service/NewTechnicianForm';
+import NewServiceAppointmentForm from './Service/NewServiceForm';
+import ServiceAppointmentList from './Service/ServiceList';
 // import AutomobileForm from './Inventory/CreateAutomobileForm';
 // import ManufacturerForm from './Inventory/CreateManufacturerForm';
 // import VehicleModelForm from './Inventory/CreateVehicleModelForm';
@@ -36,11 +35,10 @@ function App() {
           {/* <Route path="models/create/" element={<VehicleModelForm />} />
           <Route path="manufacturers/create/" element={<ManufacturerForm />} />
           <Route path="automobiles/create/" element={<AutomobileForm />} />
-          <Route path="technicians/create/" element={<TechnicianForm />} />
-          <Route path="technicians/" element={<TechnicianList />} />
-          <Route path="appointments/create/" element={<AppointmentForm />} />
-          <Route path="appointments/" element={<AppointmentList />}/>
-          <Route path="appointments/history/" element={<AppointmentHistoryList />}/>
+          <Route path="/technicians" element={<TechnicianList />} />
+          <Route path="/technicians/new" element={<NewTechnicianForm />} />
+          <Route path="/appointments" element={<ServiceAppointmentList />} />
+          <Route path="/appointments/new" element={<NewServiceAppointmentForm />} />
           <Route path="manufacturers/list/" element={<ManufacturersList />}/>
           <Route path="automobiles/list/" element={<AutomobileList />}/>
           <Route path="models/list/" element={<ModelsList />}/> */}
