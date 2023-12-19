@@ -5,47 +5,41 @@ from django.urls import reverse
 
 
 class AutomobileVO(models.Model):
-    import_href = models.CharField(max_length=200)
-    vin = models.CharField(max_length=17)
-    sold = models.BooleanField(default=False)
+    import_href = models.CharField(max_length=200, unique=True)
+    color = models.CharField(max_length=50, null=True)
+    year = models.PositiveSmallIntegerField(null=True)
+    vin = models.CharField(max_length=17, unique=True)
+    available = models.BooleanField(default=True)
 
     def __str__(self):
         return self.vin
 
 
 class SalesPerson(models.Model):
-    name = models.CharField(max_length=200)
-    employee_number = models.PositiveIntegerField(unique=True)
+    name = models.CharField(max_length=50)
+    employee_number = models.PositiveSmallIntegerField(unique=True)
+
+    def get_api_url(self):
+        return reverse("api_list_sales_people", kwargs={"pk": self.pk})
 
     def __str__(self):
         return self.name
 
 
 class Customer(models.Model):
-    name = models.CharField(max_length=200)
-    street = models.CharField(max_length=200)
-    apartment = models.CharField(max_length=100, null=True)
-    city = models.CharField(max_length=100)
-    state = models.CharField(max_length=2)
-    zip_code = models.PositiveIntegerField()
-    phone_number = models.CharField(max_length=12)
+    name = models.CharField(max_length=50)
+    address = models.CharField(max_length=200)
+    phone_number = models.CharField(max_length=10)
 
-    @property
-    def address(self):
-        if self.apartment is None or self.apartment == "":
-            return f"{self.street}, {self.city}, {self.state} {self.zip_code}"
-        return (
-            f"{self.street} {self.apartment}, "
-            f"{self.city}, {self.state} {self.zip_code}"
-        )
+    def get_api_url(self):
+        return reverse("api_show_customer", kwargs={"pk": self.pk})
 
     def __str__(self):
         return self.name
 
 
-class Sale(models.Model):
-    price = models.PositiveIntegerField()
-    automobile = models.OneToOneField(
+class SalesRecord(models.Model):
+    automobile = models.ForeignKey(
         AutomobileVO,
         related_name="sales",
         on_delete=models.CASCADE,
@@ -53,16 +47,17 @@ class Sale(models.Model):
     sales_person = models.ForeignKey(
         SalesPerson,
         related_name="sales",
-        on_delete=models.PROTECT,
+        on_delete=models.CASCADE,
     )
     customer = models.ForeignKey(
         Customer,
         related_name="sales",
-        on_delete=models.PROTECT,
+        on_delete=models.CASCADE,
     )
+    price = models.CharField(max_length=200)
 
     def get_api_url(self):
-        return reverse("api_show_sale", kwargs={"id": self.id})
+        return reverse("api_show_salesrecord", kwargs={"pk": self.pk})
 
     def __str__(self):
-        return f"{self.automobile} - {self.customer}"
+        return f"Car: {self.automobile} | Customer: {self.customer} "

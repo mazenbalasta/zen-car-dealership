@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
 function Nav() {
   return (
@@ -10,6 +10,42 @@ function Nav() {
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            <li className="nav-item dropdown">
+              <a className="nav-link dropdown-toggle" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Inventory
+              </a>
+              <ul className="dropdown-menu" aria-labelledby='navbarDarkDropdownMenuLink'>
+                <li><Link to="/models" className="dropdown-item">Vehicle Model List</Link></li>
+                <li><Link to="/models/new" className="dropdown-item">Create a Vehicle Model</Link></li>
+                <li><Link to="automobiles/" className="dropdown-item">List of Automobiles</Link></li>
+                <li><Link to="automobiles/new" className="dropdown-item">Create an Automobile</Link></li>
+                <li><Link to="/manufacturers" className="dropdown-item">Manufacturers List</Link></li>
+                <li><Link to="/manufacturers/new" className="dropdown-item">Create a Manufacturer</Link></li>
+              </ul>
+            </li>
+            <li className="nav-item dropdown">
+              <a className="nav-link dropdown-toggle" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Service Center
+              </a>
+              <ul className="dropdown-menu" aria-labelledby='navbarDarkDropdownMenuLink'>
+                <li><Link to="appointments/" className="dropdown-item">Appointment List</Link></li>
+                <li><Link to="appointments/new" className="dropdown-item">Create a Service Appointment</Link></li>
+                <li><Link to="history/" className="dropdown-item">Service History</Link></li>
+                <li><Link to="technicians/new" className="dropdown-item">Create a Technician</Link></li>
+              </ul>
+            </li>
+            <li className="nav-item dropdown">
+              <a className="nav-link dropdown-toggle" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Sales Center
+              </a>
+              <ul className="dropdown-menu" aria-labelledby='navbarDarkDropdownMenuLink'>
+                <li><Link to="/sales/new" className="dropdown-item">Create a Sale</Link></li>
+                <li><Link to="/customer/new" className="dropdown-item">Add a Customer</Link></li>
+                <li><Link to="/salesperson/new" className="dropdown-item">Create a Sales Person</Link></li>
+                <li><Link to="/sales" className="dropdown-item">List of All Sales</Link></li>
+                <li><Link to="/salesperson/sales" className="dropdown-item">Sales History</Link></li>
+              </ul>
+            </li>
           </ul>
         </div>
       </div>
