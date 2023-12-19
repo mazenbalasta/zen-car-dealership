@@ -55,12 +55,12 @@ function SalesPersonForm() {
                     <h1>Add a Salesperson</h1>
                     <form onSubmit={handleSubmit} id="create-salesperson-form">
                         <div className="form-floating mb-3">
-                             <input value={firstName} onChange={handleFirstNameChange} placeholder="First Name" required type="text" name="first_name" id="first_name" className="form-control" />
-                             <label htmlFor="first_name">First Name..</label>
+                            <input value={firstName} onChange={handleFirstNameChange} placeholder="First Name" required type="text" name="first_name" id="first_name" className="form-control" />
+                            <label htmlFor="first_name">First Name..</label>
                         </div>
                         <div className="form-floating mb-3">
-                             <input value={lastName} onChange={handleLastNameChange} placeholder="Last Name" required type="text" name="last_name" id="last_name" className="form-control" />
-                             <label htmlFor="last_name">Last Name..</label>
+                            <input value={lastName} onChange={handleLastNameChange} placeholder="Last Name" required type="text" name="last_name" id="last_name" className="form-control" />
+                            <label htmlFor="last_name">Last Name..</label>
                         </div>
                         <div className="form-floating mb-3">
                             <input value={employeeId} onChange={handleEmployeeIdChange} placeholder="Employee ID" required type="number" pattern="[0-9]" name="employee_id" id="employee_id" className="form-control" />
@@ -71,7 +71,7 @@ function SalesPersonForm() {
                 </div>
             </div>
         </div>
-        );
-    }
+    );
+}
 
-    export default SalesPersonForm;
+export default SalesPersonForm;

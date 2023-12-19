@@ -100,50 +100,51 @@ function SalesRecordForm() {
     const value = event.target.value;
     setCustomer(value);
   }
-    return (
-        <div className="row">
-            <div className="offset-3 col-6">
-                <div className="shadow p-4 mt-4">
-                    <h1>Record a New Sale</h1>
-                    <form onSubmit={handleSubmit} id="create-record-of-sale-form">
-                        <div className="form-floating mb-3">
-                            <select required value={automobile} onChange={handleAutomobileChange} placeholder="Automobile VIN" type="text" name="automobile" id="automobile" className="form-control">
-                             <option value="">Choose an automobile VIN..</option>
-                             {automobiles?.map(auto => {return (
-                             <option key={auto.vin} value={auto.vin}>{auto.vin}</option>
-                             )
-                             })}
-                             </select>
-                        </div>
-                        <div className="form-floating mb-3">
-                            <select onChange={handleSalesPersonChange} placeholder="sales_person" type="text" name="sales_person"  id="sales_person" className="form-control">
-                             <option value="">Choose a salesperson..</option>
-                             {salespersons?.map(salespeople => {
-                                return (
-                             <option key={salespeople.id} value={salespeople.employee_id}>{salespeople.first_name}{salespeople.last_name}</option>
-                             )
-                             })}
-                             </select>
-                        </div>
-                        <div className="form-floating mb-3">
-                            <select onChange={handleCustomerChange} placeholder="Customer" type="text" name="customer" id="customer" className="form-control">
-                             <option value="">Choose a customer..</option>
-                             {customers?.map(customer => {
-                                return (
-                             <option key={customer.id} value={customer.id}>{customer.first_name}{customer.last_name}</option>
-                             )
-                             })}
-                             </select>
-                        </div>
-                        <div className="form-floating mb-3">
-                            <input value={price} onChange={handlePriceChange} required placeholder="Price" type="number" min="0" name="employee_id" id="price" className="form-control" />
-                            <label htmlFor="address">0</label>
-                        </div>
-                        <button className="btn btn-primary">Create</button>
-                    </form>
-                </div>
+  return (
+    <div className="row">
+      <div className="offset-3 col-6">
+        <div className="shadow p-4 mt-4">
+          <h1>Record a New Sale</h1>
+          <form onSubmit={handleSubmit} id="create-record-of-sale-form">
+            <div className="form-floating mb-3">
+              <select required value={automobile} onChange={handleAutomobileChange} placeholder="Automobile VIN" type="text" name="automobile" id="automobile" className="form-control">
+                <option value="">Choose an automobile VIN..</option>
+                {automobiles?.map(auto => {
+                  return (
+                    <option key={auto.vin} value={auto.vin}>{auto.vin}</option>
+                  )
+                })}
+              </select>
             </div>
+            <div className="form-floating mb-3">
+              <select onChange={handleSalesPersonChange} placeholder="sales_person" type="text" name="sales_person" id="sales_person" className="form-control">
+                <option value="">Choose a salesperson..</option>
+                {salespersons?.map(salespeople => {
+                  return (
+                    <option key={salespeople.id} value={salespeople.employee_id}>{salespeople.first_name}{salespeople.last_name}</option>
+                  )
+                })}
+              </select>
+            </div>
+            <div className="form-floating mb-3">
+              <select onChange={handleCustomerChange} placeholder="Customer" type="text" name="customer" id="customer" className="form-control">
+                <option value="">Choose a customer..</option>
+                {customers?.map(customer => {
+                  return (
+                    <option key={customer.id} value={customer.id}>{customer.first_name}{customer.last_name}</option>
+                  )
+                })}
+              </select>
+            </div>
+            <div className="form-floating mb-3">
+              <input value={price} onChange={handlePriceChange} required placeholder="Price" type="number" min="0" name="employee_id" id="price" className="form-control" />
+              <label htmlFor="address">0</label>
+            </div>
+            <button className="btn btn-primary">Create</button>
+          </form>
         </div>
-        );
-    }
-    export default SalesRecordForm;
+      </div>
+    </div>
+  );
+}
+export default SalesRecordForm;
