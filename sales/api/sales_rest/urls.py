@@ -1,19 +1,22 @@
 from django.urls import path
-from .views import api_list_sales_people, api_show_sales_person
+
 from .views import (
-    api_list_customer,
-    api_show_customer,
-    api_list_salesrecords,
-    api_show_salesrecord,
-    api_list_automobiles,
+    api_list_automobile_vo,
+    api_salespeople,
+    api_salesperson,
+    api_customers,
+    api_customer,
+    api_record_of_sales,
+    api_record_of_sale,
 )
 
+
 urlpatterns = [
-    path("sales-people/", api_list_sales_people, name="api_list_sales_people"),
-    path("sales-people/<int:id>/", api_show_sales_person, name="api_show_sales_person"),
-    path("customers/", api_list_customer, name="api_list_customer"),
-    path("customers/<int:pk>/", api_show_customer, name="api_show_customer"),
-    path("salesrecords/", api_list_salesrecords, name="api_list_salesrecords"),
-    path("salesrecords/<int:pk>/", api_show_salesrecord, name="api_show_salesrecord"),
-    path("automobiles/", api_list_automobiles, name="api_list_automobile"),
+    path("automobiles/", api_list_automobile_vo, name="api_list_automobile_vo"),
+    path("salespeople/", api_salespeople, name="api_salespeople"),
+    path("salespeople/<int:id>/", api_salesperson, name="api_salesperson"),
+    path("customers/", api_customers, name="api_customers"),
+    path("customers/<int:id>/", api_customer, name="api_customer"),
+    path("sales/", api_record_of_sales, name="api_record_of_sales"),
+    path("sales/<int:id>/", api_record_of_sale, name="api_record_of_sale"),
 ]

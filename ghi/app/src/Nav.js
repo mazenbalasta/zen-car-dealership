@@ -39,11 +39,12 @@ function Nav() {
                 Sales Center
               </a>
               <ul className="dropdown-menu" aria-labelledby='navbarDarkDropdownMenuLink'>
-                <li><Link to="/sales/new" className="dropdown-item">Create a Sale</Link></li>
-                <li><Link to="/customer/new" className="dropdown-item">Add a Customer</Link></li>
-                <li><Link to="/salesperson/new" className="dropdown-item">Create a Sales Person</Link></li>
-                <li><Link to="/sales" className="dropdown-item">List of All Sales</Link></li>
-                <li><Link to="/salesperson/sales" className="dropdown-item">Sales History</Link></li>
+                <li><Link to="customers/" className="dropdown-item">Add a Customer</Link></li>
+                <li><Link to="customers/list/" className="dropdown-item">Customers</Link></li>
+                <li><Link to="salespeople/" className="dropdown-item">Add a Salesperson</Link></li>
+                <li><Link to="salespeople/list/" className="dropdown-item">Salespeople</Link></li>
+                <li><Link to="sales/" className="dropdown-item">Add a Sale</Link></li>
+                <li><Link to="sales/history/" className="dropdown-item">Sales History</Link></li>
               </ul>
             </li>
           </ul>
