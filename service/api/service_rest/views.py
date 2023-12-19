@@ -11,6 +11,7 @@ class TechnicianListEncoder(ModelEncoder):
         "employee_id",
         "first_name",
         "last_name",
+        "id"
     ]
 
 class TechnicianDetailEncoder(ModelEncoder):
@@ -21,6 +22,20 @@ class TechnicianDetailEncoder(ModelEncoder):
         "last_name",
     ]
 
+class AppointmentListEncoder(ModelEncoder):
+    model = Appointment
+    properties = [
+        "vin",
+        "customer",
+        "date_time",
+        "technician",
+        "reason"
+    ]
+    encoders = {
+        "technician": TechnicianDetailEncoder(),
+    }
+    def get_extra_data(self, o):
+        return { "status": o.status.name }
 
 
 @require_http_methods(["GET", "POST"])
@@ -52,3 +67,30 @@ def show_technician(request, id):
     else:
         count, _ = Technician.objects.filter(id=id).delete()
         return JsonResponse({"deleted": count > 0})
+
+
+@require_http_methods(["GET", "POST"])
+def list_appointments(request):
+    if request.method == "GET":
+        appointments = Appointment.objects.all()
+        return JsonResponse(
+            {"appointments": appointments},
+            encoder=AppointmentListEncoder,
+        )
+    else:
+        content = json.loads(request.body)
+        try:
+            technician = Technician.objects.get(id=content["technician"])
+            content["technician"] = technician
+        except Technician.DoesNotExist:
+            return JsonResponse(
+                {"message": "Invalid technician id"},
+                status=400,
+            )
+
+        appointment = Appointment.create(**content)
+        return JsonResponse(
+            appointment,
+            encoder=AppointmentListEncoder,
+            safe=False
+        )
