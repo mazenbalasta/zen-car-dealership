@@ -9,7 +9,7 @@ const InitForm = {
     reason: ''
 }
 
-function NewAppointmentForm () {
+function NewServiceAppointmentForm () {
     const [technicians, setTechnicians] = useState([]);
     const [formData, setFormData] = useState({ ...InitForm })
 
@@ -117,4 +117,4 @@ function NewAppointmentForm () {
 
 }
 
-export default NewAppointmentForm;
+export default NewServiceAppointmentForm;

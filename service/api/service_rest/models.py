@@ -38,6 +38,8 @@ class Appointment(models.Model):
         related_name = "appointments",
         on_delete=models.PROTECT,
     )
+    def get_api_url(self):
+        return reverse("show_appointment", kwargs={"id": self.id})
 
     @classmethod
     def create(cls, **kwargs):

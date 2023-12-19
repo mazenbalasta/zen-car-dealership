@@ -37,6 +37,21 @@ class AppointmentListEncoder(ModelEncoder):
     def get_extra_data(self, o):
         return { "status": o.status.name }
 
+class AppointmentDetailEncoder(ModelEncoder):
+    model = Appointment
+    properties = [
+        "vin",
+        "customer",
+        "date_time",
+        "technician",
+        "reason"
+    ]
+    encoders = {
+        "technician": TechnicianDetailEncoder(),
+    }
+    def get_extra_data(self, o):
+        return { "status": o.status.name }
+
 
 @require_http_methods(["GET", "POST"])
 def list_technicians(request):
@@ -92,5 +107,53 @@ def list_appointments(request):
         return JsonResponse(
             appointment,
             encoder=AppointmentListEncoder,
+            safe=False
+        )
+
+@require_http_methods(["GET"])
+def show_appointment(request, id):
+    if request.method == "GET":
+        appointment = Appointment.objects.get(id=id)
+        return JsonResponse(
+            appointment,
+            encoder=AppointmentDetailEncoder,
+            safe=False
+        )
+
+@require_http_methods(["PUT"])
+def cancel_appointment(request, id):
+    if request.method == "PUT":
+        try:
+            appointment = Appointment.objects.get(id=id)
+        except Appointment.DoesNotExist:
+            return JsonResponse(
+                {"message": "Invalid appointment id"},
+                status=400,
+            )
+
+        appointment = Appointment.objects.get(id=id)
+        appointment.cancel()
+        return JsonResponse(
+            appointment,
+            encoder=AppointmentDetailEncoder,
+            safe=False
+        )
+
+@require_http_methods(["PUT"])
+def finish_appointment(request, id):
+    if request.method == "PUT":
+        try:
+            appointment = Appointment.objects.get(id=id)
+        except Appointment.DoesNotExist:
+            return JsonResponse(
+                {"message": "Invalid appointment id"},
+                status=400,
+            )
+
+        appointment = Appointment.objects.get(id=id)
+        appointment.finish()
+        return JsonResponse(
+            appointment,
+            encoder=AppointmentDetailEncoder,
             safe=False
         )
