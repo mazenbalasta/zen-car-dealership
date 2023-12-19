@@ -49,7 +49,6 @@ class Appointment(models.Model):
         appointment.save()
         return appointment
 
-
     def finish(self):
         status = Status.objects.get(name="finished")
         self.status = status

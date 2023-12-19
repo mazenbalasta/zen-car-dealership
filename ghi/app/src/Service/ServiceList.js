@@ -5,20 +5,20 @@ function ServiceAppointmentList () {
     const [automobiles, setAutomobiles] = useState([]);
 
     const getData = async () => {
-        const response = await fetch('http://localhost:8080/api/appointments/');
+      const response = await fetch('http://localhost:8080/api/appointments/');
 
-        if (response.ok) {
-            const data = await response.json();
-            setAppointments(data.appointments);
-            console.log(data)
-        }
+      if (response.ok) {
+          const data = await response.json();
+          setAppointments(data.appointments);
+          console.log(data)
+      }
 
-        const automobileResponse = await fetch('http://localhost:8100/api/automobiles/');
-        if (automobileResponse.ok) {
-          const automobiles = await automobileResponse.json();
-          setAutomobiles(automobiles.autos);
-          console.log(automobiles)
-        }
+      const automobileResponse = await fetch('http://localhost:8100/api/automobiles/');
+      if (automobileResponse.ok) {
+        const automobiles = await automobileResponse.json();
+        setAutomobiles(automobiles.autos);
+        console.log(automobiles)
+      }
     }
 
     useEffect(() => {
@@ -57,7 +57,7 @@ function ServiceAppointmentList () {
     }
 
     return(
-        <>
+      <>
         <h1>Service Appointments</h1>
         <table className="table table-striped">
           <thead>
@@ -93,10 +93,10 @@ function ServiceAppointmentList () {
             })}
           </tbody>
         </table>
-      <button type="button" className="btn btn-primary" data-bs-toggle="button">
-        Add A Service Appointment
-      </button>
-    </>
+        <button type="button" className="btn btn-primary" data-bs-toggle="button">
+          Add A Service Appointment
+        </button>
+      </>
     );
 };
 
