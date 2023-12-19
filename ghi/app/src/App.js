@@ -1,8 +1,10 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainPage from './MainPage';
 import Nav from './Nav';
-import TechnicianList from './TechnicianList'
-import NewTechnicianForm from './NewTechnicianForm'
+import TechnicianList from './Service/TechnicianList'
+import NewTechnicianForm from './Service/NewTechnicianForm'
+import NewServiceAppointmentForm from './Service/NewServiceForm';
+import ServiceAppointmentList from './Service/ServiceList';
 import NewSale from './Sales/NewSale';
 import ListSales from './Sales/ListSales';
 import NewSalesPerson from './Sales/NewSalesPerson';
@@ -92,7 +94,7 @@ function App() {
       <Nav />
       <div className="container">
         <Routes>
-          <Route path="/" element={<MainPage />} />
+          {/* <Route path="/" element={<MainPage />} />
           <Route path="manufacturers">
             <Route path="" element={<ManufacturerList />} />
             <Route path="new" element={<ManufacturerForm />} />
@@ -101,7 +103,7 @@ function App() {
             <Route path="" element={<VehicleModelList models={models} />} />
             <Route path="new/" element={<VehicleModelForm fetchModels={fetchModels} />} />
           </Route>
-          <Route path="/automobiles/" element={<AutomobileList />} />
+          <Route path="/automobiles/" element={<AutomobileList />} /> */}
           {/* <Route path="/automobiles/new" element={<AutomobileForm />} /> */}
           <Route path="/sales/new" element={<NewSale automobiles={automobiles} salespersons={salespersons} customers={customers} fetchSales={fetchSales} />} />
           <Route path="/sales" element={<ListSales sales={sales} />} />

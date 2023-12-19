@@ -31,6 +31,7 @@ function Nav() {
                 <li><Link to="appointments/" className="dropdown-item">Appointment List</Link></li>
                 <li><Link to="appointments/new" className="dropdown-item">Create a Service Appointment</Link></li>
                 <li><Link to="history/" className="dropdown-item">Service History</Link></li>
+                <li><Link to="technicians/" className="dropdown-item">Technicians</Link></li>
                 <li><Link to="technicians/new" className="dropdown-item">Create a Technician</Link></li>
               </ul>
             </li>
