@@ -56,7 +56,7 @@ function VehicleModelForm () {
                 navigate("/models")
                 window.alert('Model created!');
             } else {
-                window.alert('There was a problem creating your model');
+                window.alert('There was a problem creating the model');
             }
         }
     };

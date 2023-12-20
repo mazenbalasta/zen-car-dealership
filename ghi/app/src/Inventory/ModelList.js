@@ -49,7 +49,7 @@ function ModelList () {
           Add A Model
         </button>
       </>
-        );
+    );
 }
 
 export default ModelList
