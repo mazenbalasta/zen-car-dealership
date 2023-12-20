@@ -53,8 +53,9 @@ This application loads with an empty database. To fully interact with this appli
 
 ## Service microservice
 
-Explain your models and integration with the inventory
-microservice, here.
+**Description**
+The Service microservice is responsible for managing service appointments for automobiles. It consists of several models defined in the service/api/service_rest/models.py file:
+
 
 ## Sales microservice
 

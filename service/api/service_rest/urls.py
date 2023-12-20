@@ -5,7 +5,8 @@ from .views import (
     list_appointments,
     show_appointment,
     cancel_appointment,
-    finish_appointment
+    finish_appointment,
+    list_automobile
 )
 
 urlpatterns = [
@@ -37,5 +38,10 @@ urlpatterns = [
         "appointments/<int:id>/finish/",
          finish_appointment,
          name="finish_appointment"
-    )
+    ),
+    path(
+        "autos/",
+        list_automobile,
+        name="list_automobile"
+    ),
 ]

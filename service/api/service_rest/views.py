@@ -2,56 +2,14 @@ from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
 from django.http import JsonResponse
 import json
-from common.json import ModelEncoder
 from .models import AutomobileVO, Technician, Appointment
-
-class TechnicianListEncoder(ModelEncoder):
-    model = Technician
-    properties = [
-        "employee_id",
-        "first_name",
-        "last_name",
-        "id"
-    ]
-
-class TechnicianDetailEncoder(ModelEncoder):
-    model = Technician
-    properties = [
-        "employee_id",
-        "first_name",
-        "last_name",
-    ]
-
-class AppointmentListEncoder(ModelEncoder):
-    model = Appointment
-    properties = [
-        "vin",
-        "customer",
-        "date_time",
-        "technician",
-        "reason",
-        "id"
-    ]
-    encoders = {
-        "technician": TechnicianDetailEncoder(),
-    }
-    def get_extra_data(self, o):
-        return { "status": o.status.name }
-
-class AppointmentDetailEncoder(ModelEncoder):
-    model = Appointment
-    properties = [
-        "vin",
-        "customer",
-        "date_time",
-        "technician",
-        "reason"
-    ]
-    encoders = {
-        "technician": TechnicianDetailEncoder(),
-    }
-    def get_extra_data(self, o):
-        return { "status": o.status.name }
+from .encoders import (
+    TechnicianListEncoder,
+    TechnicianDetailEncoder,
+    AppointmentListEncoder,
+    AppointmentDetailEncoder,
+    AutomobileVOListEncoder
+)
 
 
 @require_http_methods(["GET", "POST"])
@@ -157,4 +115,13 @@ def finish_appointment(request, id):
             appointment,
             encoder=AppointmentDetailEncoder,
             safe=False
+        )
+
+@require_http_methods(["GET"])
+def list_automobile(request):
+    if request.method == "GET":
+        autos = AutomobileVO.objects.all()
+        return JsonResponse(
+            {"autos": autos},
+            encoder=AutomobileVOListEncoder,
         )
