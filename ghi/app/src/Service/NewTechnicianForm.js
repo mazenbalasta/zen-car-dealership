@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import { useNavigate } from "react-router-dom";
 
 
 const InitForm = {
@@ -9,6 +10,7 @@ const InitForm = {
 
 function NewTechnicianForm () {
     const [formData, setFormData] = useState({ ...InitForm });
+    const navigate = useNavigate();
 
     const handleInputChange = (e) => {
         const inputName = e.target.name;
@@ -22,22 +24,25 @@ function NewTechnicianForm () {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const confirmSubmit = window.confirm('Are you sure you want to create this new technician?');
 
-        const url = `http://localhost:8080/api/technicians/`;
+        if (confirmSubmit) {
+          const url = `http://localhost:8080/api/technicians/`;
 
-        const fetchConfig = {
-            method: 'post',
-            body: JSON.stringify(formData),
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        };
+          const fetchConfig = {
+              method: 'post',
+              body: JSON.stringify(formData),
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+          };
 
-        const response = await fetch (url, fetchConfig);
-        console.log(response);
-        if (response.ok) {
+          const response = await fetch (url, fetchConfig);
+          if (response.ok) {
             setFormData({ ...InitForm })
-        }
+
+          }
+        } else {window.alert('Creation cancelled')}
     }
 
     return (
