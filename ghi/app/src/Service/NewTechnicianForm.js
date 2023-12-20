@@ -42,7 +42,7 @@ function NewTechnicianForm () {
         setFormData({ ...InitForm })
         navigate("/technicians")
         window.alert('Technician created!');
-      }
+      } else {window.alert('Technician creation failed!')}
     } else {
       window.alert('Creation cancelled');
       setFormData({ ...InitForm })

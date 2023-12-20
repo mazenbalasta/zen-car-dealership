@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import { formatDateTime } from './Functions';
+import { useNavigate } from "react-router-dom";
 
 function ServiceHistory() {
   const [appointments, setAppointments] = useState([]);
   const [automobiles, setAutomobiles] = useState([]);
   const [searchParam, setSearchParam] = useState('');
+  const navigate = useNavigate();
 
   const getData = async () => {
     const response = await fetch('http://localhost:8080/api/appointments/');
@@ -75,7 +77,7 @@ function ServiceHistory() {
           })}
         </tbody>
       </table>
-      <button type="button" className="btn btn-primary" data-bs-toggle="button">
+      <button onClick={() => navigate("/appointments/new")} type="button" className="btn btn-primary" data-bs-toggle="button">
         Add A Service Appointment
       </button>
     </>

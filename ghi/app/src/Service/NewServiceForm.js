@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 
 const InitForm = {
   vin: '',
@@ -12,6 +13,7 @@ const InitForm = {
 function NewServiceAppointmentForm() {
   const [technicians, setTechnicians] = useState([]);
   const [formData, setFormData] = useState({ ...InitForm })
+  const navigate = useNavigate();
 
   const fetchData = async () => {
     const url = 'http://localhost:8080/api/technicians/';
@@ -47,26 +49,32 @@ function NewServiceAppointmentForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const confirmSubmit = window.confirm('Are you sure you want to create this new sevice appointment?');
 
-    const { date, time, ...postData } = formData;
-    const url = `http://localhost:8080/api/appointments/`;
+    if (confirmSubmit) {
+      const { date, time, ...postData } = formData;
+      const url = `http://localhost:8080/api/appointments/`;
+      const fetchConfig = {
+        method: 'post',
+        body: JSON.stringify({
+          ...postData,
+          date_time: `${formData.date}T${formData.time}`,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
 
-    const fetchConfig = {
-      method: 'post',
-      body: JSON.stringify({
-        ...postData,
-        date_time: `${formData.date}T${formData.time}`,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      };
 
-    };
-    console.log(fetchConfig)
+      const response = await fetch(url, fetchConfig);
+      if (response.ok) {
+        setFormData({ ...InitForm })
+        navigate("/appointments")
+        window.alert('Service appointment created!');
 
-    const response = await fetch(url, fetchConfig);
-    console.log(response)
-    if (response.ok) {
+      } else {window.alert('Service appointment creation failed!')}
+    } else {
+      window.alert('Creation cancelled');
       setFormData({ ...InitForm })
     }
   };
