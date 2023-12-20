@@ -38,11 +38,11 @@ function App() {
           <Route path="/appointments" element={<ServiceAppointmentList />} />
           <Route path="/appointments/new" element={<NewServiceAppointmentForm />} />
           <Route path="/appointments/history" element={<ServiceHistory />} />
-          <Route path="/automobiles/list/" element={<AutomobileList />}/>
+          <Route path="/automobiles/list/" element={<AutomobileList />} />
           <Route path="/automobiles/create/" element={<AutomobileForm />} />
-          <Route path="/manufacturers/" element={<ManufacturersList />}/>
+          <Route path="/manufacturers/" element={<ManufacturersList />} />
           <Route path="/manufacturers/new/" element={<CreateManufacturerForm />} />
-          <Route path="/models/" element={<ModelList />}/>
+          <Route path="/models/" element={<ModelList />} />
           <Route path="/models/new/" element={<CreateVehicleModelForm />} />
         </Routes>
       </div>
