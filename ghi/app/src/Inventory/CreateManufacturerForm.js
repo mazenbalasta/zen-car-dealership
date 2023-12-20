@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 const InitForm = {name: ''};
 
-function ManufacturerForm () {
+function CreateManufacturerForm () {
     const [formData, setFormData] = useState({ ...InitForm });
     const navigate = useNavigate();
 
@@ -50,7 +50,7 @@ function ManufacturerForm () {
             <form onSubmit={handleSubmit} id="add-automobile">
               <div className="form-floating mb-3">
                 <input onChange={handleInputChange} value={formData.name} placeholder="Manufacturer name" required type="text" name="name" id="name" className="form-control"/>
-                <label htmlFor="color">Manufacturer name</label>
+                <label htmlFor="name">Manufacturer name</label>
               </div>
               <button className="btn btn-primary">Create</button>
             </form>
@@ -60,4 +60,4 @@ function ManufacturerForm () {
     );
 }
 
-export default ManufacturerForm
+export default CreateManufacturerForm

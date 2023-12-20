@@ -12,14 +12,12 @@ function ServiceHistory () {
       if (response.ok) {
           const data = await response.json();
           setAppointments(data.appointments);
-          console.log(data)
       }
 
       const automobileResponse = await fetch('http://localhost:8100/api/automobiles/');
       if (automobileResponse.ok) {
         const automobiles = await automobileResponse.json();
         setAutomobiles(automobiles.autos);
-        console.log(automobiles)
       }
     }
 

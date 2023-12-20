@@ -19,7 +19,6 @@ def poll(repeat=True):
         try:
             response = requests.get("http://project-beta-inventory-api-1:8000/api/automobiles/")
             content= json.loads(response.content)
-            print(content)
             for auto in content["autos"]:
                 AutomobileVO.objects.update_or_create(
                     vin=auto["vin"],

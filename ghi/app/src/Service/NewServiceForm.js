@@ -19,7 +19,6 @@ function NewServiceAppointmentForm () {
 
         if (response.ok) {
             const data = await response.json();
-            console.log(data);
             setTechnicians(data.technicians);
         }
     }

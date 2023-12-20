@@ -15,10 +15,10 @@ import NewServiceAppointmentForm from './Service/NewServiceForm';
 import ServiceAppointmentList from './Service/ServiceList';
 import AutomobileForm from './Inventory/CreateAutomobileForm';
 import ServiceHistory from './Service/ServiceHistory';
-import ManufacturersList from './Inventory/ManufacturerList';
-import ManufacturerForm from './Inventory/CreateManufacturerForm';
+import ManufacturersList from './Inventory/ManufacturersList';
+import CreateManufacturerForm from './Inventory/CreateManufacturerForm';
 import ModelList from './Inventory/ModelList';
-import VehicleModelForm from './Inventory/CreateVehicleModelForm';
+import CreateVehicleModelForm from './Inventory/CreateVehicleModelForm';
 
 function App() {
   return (
@@ -38,13 +38,12 @@ function App() {
           <Route path="/appointments" element={<ServiceAppointmentList />} />
           <Route path="/appointments/new" element={<NewServiceAppointmentForm />} />
           <Route path="/appointments/history" element={<ServiceHistory />} />
-          <Route path="automobiles/list/" element={<AutomobileList />}/>
-          <Route path="automobiles/create/" element={<AutomobileForm />} />
-          <Route path="manufacturers/" element={<ManufacturersList />}/>
-          <Route path="manufacturers/new/" element={<ManufacturerForm />} />
-          <Route path="models/" element={<ModelList />}/>
-          <Route path="models/new/" element={<VehicleModelForm />} />
-
+          <Route path="/automobiles/list/" element={<AutomobileList />}/>
+          <Route path="/automobiles/create/" element={<AutomobileForm />} />
+          <Route path="/manufacturers/" element={<ManufacturersList />}/>
+          <Route path="/manufacturers/new/" element={<CreateManufacturerForm />} />
+          <Route path="/models/" element={<ModelList />}/>
+          <Route path="/models/new/" element={<CreateVehicleModelForm />} />
         </Routes>
       </div>
     </BrowserRouter>

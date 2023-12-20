@@ -7,7 +7,7 @@ const InitForm = {
     manufacturer_id: ''
 };
 
-function VehicleModelForm () {
+function CreateVehicleModelForm () {
     const [manufacturers, setManufacturers] = useState([]);
     const [formData, setFormData] = useState({ ...InitForm });
     const navigate = useNavigate();
@@ -69,7 +69,7 @@ function VehicleModelForm () {
             <form onSubmit={handleSubmit} id="add-automobile">
               <div className="form-floating mb-3">
                 <input onChange={handleInputChange} value={formData.name} placeholder="Model name..." required type="text" name="name" id="name" className="form-control"/>
-                <label htmlFor="color">Name</label>
+                <label htmlFor="name">Name</label>
               </div>
               <div className="form-floating mb-3">
                 <input onChange={handleInputChange} value={formData.picture_url} placeholder="Picture URL..." required type="url" name="picture_url" id="picture_url" className="form-control"/>
@@ -93,4 +93,4 @@ function VehicleModelForm () {
     );
 }
 
-export default VehicleModelForm
+export default CreateVehicleModelForm
