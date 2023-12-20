@@ -17,8 +17,8 @@ import AutomobileForm from './Inventory/CreateAutomobileForm';
 import ServiceHistory from './Service/ServiceHistory';
 // import ManufacturersList from './Inventory/ManufacturesList';
 // import ManufacturerForm from './Inventory/CreateManufacturerForm';
-// import ModelsList from './Inventory/ModelList';
-// import VehicleModelForm from './Inventory/CreateVehicleModelForm';
+import ModelList from './Inventory/ModelList';
+import VehicleModelForm from './Inventory/CreateVehicleModelForm';
 
 function App() {
   return (
@@ -41,9 +41,9 @@ function App() {
           <Route path="automobiles/list/" element={<AutomobileList />}/>
           <Route path="automobiles/create/" element={<AutomobileForm />} />
           {/* <Route path="manufacturers/list/" element={<ManufacturersList />}/> */}
-          {/* <Route path="manufacturers/create/" element={<ManufacturerForm />} /> */}
-          {/* <Route path="models/list/" element={<ModelsList />}/> */}
-          {/* <Route path="models/create/" element={<VehicleModelForm />} /> */}
+          {/* <Route path="manufacturers/new/" element={<ManufacturerForm />} /> */}
+          <Route path="models/" element={<ModelList />}/>
+          <Route path="models/new/" element={<VehicleModelForm />} />
 
         </Routes>
       </div>
