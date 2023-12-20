@@ -36,8 +36,6 @@ function ListAllSales() {
     loadSalesData();
   }, [selectedSalesperson]);
 
-  const [searchParam, setSearchParam] = useState('');
-
   return (
     <>
       <h1>Sales</h1>
