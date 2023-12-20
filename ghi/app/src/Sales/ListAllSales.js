@@ -3,13 +3,14 @@ import React, { useEffect, useState } from 'react';
 function ListAllSales() {
 
   const [salesData, setSalesData] = useState([]);
+  const [salespeople, setSalespeople] = useState([]);
+  const [selectedSalesperson, setSelectedSalesperson] = useState('');
 
-
-  async function loadSalesData() {
-    const response = await fetch('http://localhost:8090/api/sales/');
+  async function loadSalespeople() {
+    const response = await fetch('http://localhost:8090/api/salespeople/');
     if (response.ok) {
       const data = await response.json();
-      setSalesData(data.sales)
+      setSalespeople(data.salespeople);
     } else {
       console.error(response);
     }
@@ -17,11 +18,37 @@ function ListAllSales() {
 
   useEffect(() => {
     loadSalesData();
+    loadSalespeople();
   }, []);
+
+  async function loadSalesData() {
+    const response = await fetch('http://localhost:8090/api/sales/');
+    if (response.ok) {
+      const data = await response.json();
+      const filteredData = data.sales.filter(sale => sale.sales_person.employee_id === selectedSalesperson);
+      setSalesData(filteredData);
+    } else {
+      console.error(response);
+    }
+  }
+
+  useEffect(() => {
+    loadSalesData();
+  }, [selectedSalesperson]);
+
+  const [searchParam, setSearchParam] = useState('');
 
   return (
     <>
       <h1>Sales</h1>
+      <select value={selectedSalesperson} onChange={(e) => setSelectedSalesperson(e.target.value)}>
+        <option value="">Select a salesperson...</option>
+        {salespeople.map(salesperson => (
+          <option key={salesperson.employee_id} value={salesperson.employee_id}>
+            {salesperson.first_name} {salesperson.last_name}
+          </option>
+        ))}
+      </select>
       <table className="table table-striped">
         <thead>
           <tr className="table-success">
