@@ -117,7 +117,7 @@ function SalesRecordForm() {
                 <option value="">Choose a salesperson..</option>
                 {salespersons?.map(salespeople => {
                   return (
-                    <option key={salespeople.id} value={salespeople.employee_id}>{salespeople.first_name}{salespeople.last_name}</option>
+                    <option key={salespeople.id} value={salespeople.employee_id}>{salespeople.first_name} {salespeople.last_name}</option>
                   )
                 })}
               </select>
@@ -127,7 +127,7 @@ function SalesRecordForm() {
                 <option value="">Choose a customer..</option>
                 {customers?.map(customer => {
                   return (
-                    <option key={customer.id} value={customer.id}>{customer.first_name}{customer.last_name}</option>
+                    <option key={customer.id} value={customer.id}>{customer.first_name} {customer.last_name}</option>
                   )
                 })}
               </select>
