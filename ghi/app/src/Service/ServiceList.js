@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import { formatDateTime } from './Functions';
+import { useNavigate } from "react-router-dom";
 
 function ServiceAppointmentList() {
   const [appointments, setAppointments] = useState([]);
   const [automobiles, setAutomobiles] = useState([]);
+  const navigate = useNavigate();
 
   const getData = async () => {
     const response = await fetch('http://localhost:8080/api/appointments/');
@@ -29,14 +31,26 @@ function ServiceAppointmentList() {
     return autosVin.includes(vin);
   };
 
-  const handleFinish = async (id) => {
-    const request = await fetch(`http://localhost:8080/api/appointments/${id}/finish/`, { method: "PUT" });
-    getData();
+  const handleFinish = async (id, vin) => {
+    const confirmFinish = window.confirm('Is this appointment finished?');
+    if (confirmFinish) {
+      const request = await fetch(`http://localhost:8080/api/appointments/${id}/finish/`, { method: "PUT" });
+      getData();
+      if (request.ok) {
+        window.alert(`Service appointment for vin number: ${vin} marked finished!`)
+      }
+    }
   }
 
-  const handleCancel = async (id) => {
-    const request = await fetch(`http://localhost:8080/api/appointments/${id}/cancel/`, { method: "PUT" });
-    getData();
+  const handleCancel = async (id, vin) => {
+    const confirmCancel = window.confirm('Are you sure you want to cancel this appointment?');
+    if (confirmCancel) {
+      const request = await fetch(`http://localhost:8080/api/appointments/${id}/cancel/`, { method: "PUT" });
+      getData();
+      if (request.ok) {
+        window.alert(`Service appointment for vin number: ${vin} cancelled`)
+      }
+    }
   }
 
   return (
@@ -52,6 +66,8 @@ function ServiceAppointmentList() {
             <th>Time</th>
             <th>Technician</th>
             <th>Reason</th>
+            <th>Finished?</th>
+            <th>Cancelled?</th>
           </tr>
         </thead>
         <tbody>
@@ -69,14 +85,14 @@ function ServiceAppointmentList() {
                   <td>{formattedTime}</td>
                   <td>{technicianFullName}</td>
                   <td>{appointment.reason}</td>
-                  <td><button className="btn btn-success" onClick={() => { handleFinish(appointment.id) }}>Finish</button></td>
-                  <td><button className="btn btn-danger" onClick={() => { handleCancel(appointment.id) }}>Cancel</button></td>
+                  <td><button className="btn btn-success" onClick={() => { handleFinish(appointment.id, appointment.vin) }}>Finish</button></td>
+                  <td><button className="btn btn-danger" onClick={() => { handleCancel(appointment.id, appointment.vin) }}>Cancel</button></td>
                 </tr>
               );
             })}
         </tbody>
       </table>
-      <button type="button" className="btn btn-primary" data-bs-toggle="button">
+      <button onClick={() => navigate("/appointments/new")} type="button" className="btn btn-primary" data-bs-toggle="button">
         Add A Service Appointment
       </button>
     </>

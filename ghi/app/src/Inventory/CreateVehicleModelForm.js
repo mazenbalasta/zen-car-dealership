@@ -58,7 +58,7 @@ function CreateVehicleModelForm() {
             } else {
                 window.alert('There was a problem creating the model');
             }
-        }
+        } else {window.alert('Creation cancelled')}
     };
 
     return (
