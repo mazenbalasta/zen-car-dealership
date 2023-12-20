@@ -107,14 +107,6 @@ function AutomobileForm() {
                 })}
               </select>
             </div>
-            <div className="form-floating mb-3">
-              <select onChange={handleSoldChange} value={sold} required name="sold" id="sold" className="form-select">
-                <option value="">Select...</option>
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
-              </select>
-              <label htmlFor="sold">Sold</label>
-            </div>
             <button className="btn btn-primary">Create</button>
           </form>
         </div>
