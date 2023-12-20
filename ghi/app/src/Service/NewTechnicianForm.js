@@ -3,24 +3,26 @@ import { useNavigate } from "react-router-dom";
 
 
 const InitForm = {
-    first_name: '',
-    last_name: '',
-    employee_id: ''
+  first_name: '',
+  last_name: '',
+  employee_id: ''
 }
 
 function NewTechnicianForm () {
     const [formData, setFormData] = useState({ ...InitForm });
     const navigate = useNavigate();
 
-    const handleInputChange = (e) => {
-        const inputName = e.target.name;
-        const value = e.target.value;
+  const handleInputChange = (e) => {
+    const inputName = e.target.name;
+    const value = e.target.value;
 
-        setFormData({
-            ...formData,
-            [inputName]: value
-        });
-    }
+    setFormData({
+      ...formData,
+      [inputName]: value
+    });
+  }
+
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -68,7 +70,7 @@ function NewTechnicianForm () {
           </div>
         </div>
       </div>
-    )
+  )
 }
 
 export default NewTechnicianForm

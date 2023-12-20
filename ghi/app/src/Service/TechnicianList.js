@@ -27,7 +27,7 @@ function TechnicianList() {
     <>
       <table className="table table-striped">
         <thead>
-          <tr>
+          <tr className="table-success">
             <th>First Name</th>
             <th>Last Name</th>
             <th>Employee ID</th>

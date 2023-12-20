@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
-function ModelList () {
+function ModelList() {
     const [models, setModels] = useState([]);
     const navigate = useNavigate();
 
@@ -23,32 +23,32 @@ function ModelList () {
     }
 
     return (
-      <>
-        <h1>Models</h1>
-          <table className="table table-striped">
-            <thead>
-              <tr>
-                <th>Manufacturer</th>
-                <th>Name</th>
-                <th>Picture</th>
-              </tr>
-            </thead>
-            <tbody>
-              {models.map(model => {
-                return (
-                  <tr key={model.href}>
-                    <td>{ model.manufacturer.name }</td>
-                    <td>{ model.name }</td>
-                    <td><img src={model.picture_url} alt="" style={{ width: '200px', height: '150px' }} /></td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        <button onClick={HandleOnclick} type="button" className="btn btn-primary" data-bs-toggle="button">
-          Add A Model
-        </button>
-      </>
+        <>
+            <h1>Models</h1>
+            <table className="table table-striped">
+                <thead>
+                    <tr className="table-success">
+                        <th>Manufacturer</th>
+                        <th>Name</th>
+                        <th>Picture</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {models.map(model => {
+                        return (
+                            <tr key={model.href}>
+                                <td>{model.manufacturer.name}</td>
+                                <td>{model.name}</td>
+                                <td><img src={model.picture_url} alt="" style={{ width: '200px', height: '150px' }} /></td>
+                            </tr>
+                        );
+                    })}
+                </tbody>
+            </table>
+            <button onClick={HandleOnclick} type="button" className="btn btn-primary" data-bs-toggle="button">
+                Add A Model
+            </button>
+        </>
     );
 }
 
