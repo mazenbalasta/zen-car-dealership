@@ -22,7 +22,6 @@ function SalesRecordForm() {
 
   const loadCustomers = async () => {
     const response = await fetch('http://localhost:8090/api/customers/');
-    console.log(response);
     if (response.ok) {
       const data = await response.json();
       setCustomers(data.customers);
@@ -33,7 +32,6 @@ function SalesRecordForm() {
 
   async function loadSalespersons() {
     const response = await fetch('http://localhost:8090/api/salespeople/');
-    console.log(response)
     if (response.ok) {
       const data = await response.json();
       setSalespersons(data.salespeople);
@@ -55,7 +53,6 @@ function SalesRecordForm() {
     data.automobile = automobile;
     data.sales_person = salesPerson;
     data.customer = customer;
-    console.log(data)
     const salesUrl = 'http://localhost:8090/api/sales/'
     const fetchConfig = {
       method: 'post',
@@ -68,7 +65,6 @@ function SalesRecordForm() {
       const sale = await fetch(salesUrl, fetchConfig);
       if (sale.ok) {
         const newSale = await sale.json();
-        console.log(newSale);
         setPrice('');
         setAutomobile('');
         setSalesPerson('');
@@ -136,9 +132,9 @@ function SalesRecordForm() {
                 })}
               </select>
             </div>
-            <div className="form-floating mb-3">
+            <div className="input-group mb-3">
+            <span className="input-group-text">$</span>
               <input value={price} onChange={handlePriceChange} required placeholder="Price" type="number" min="0" name="employee_id" id="price" className="form-control" />
-              <label htmlFor="address">0</label>
             </div>
             <button className="btn btn-primary">Create</button>
           </form>

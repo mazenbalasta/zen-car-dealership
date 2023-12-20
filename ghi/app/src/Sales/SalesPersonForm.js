@@ -24,7 +24,6 @@ function SalesPersonForm() {
         const salesPerson = await fetch(salesPersonUrl, fetchConfig);
         if (salesPerson.ok) {
             const NewSalesPerson = await salesPerson.json()
-            console.log(NewSalesPerson);
 
             setFirstName('');
             setLastName('');

@@ -113,7 +113,7 @@ The Sales microservice in your application is primarily responsible for managing
 ```
 {
     "price": 130,
-    "automobile": "1C3CC5FB2AN120174",
+    "automobile": "sampleVIN123",
     "sales_person": "1",
     "customer": "1"
 }

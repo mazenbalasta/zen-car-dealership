@@ -45,7 +45,6 @@ function AutomobileForm() {
     const automobile = await fetch(automobileUrl, fetchConfig);
     if (automobile.ok) {
       const newAutomobile = await automobile.json();
-      console.log(newAutomobile);
       setColor('');
       setYear('');
       setVin('');
@@ -86,16 +85,17 @@ function AutomobileForm() {
               <label htmlFor="color">Color</label>
             </div>
             <div className="form-floating mb-3">
-              <input onChange={handleYearChange} value={year} placeholder="Year" required type="text" name="year" id="year" className="form-control" />
+              <select onChange={handleYearChange} value={year} required name="year" id="year" className="form-select">
+                <option value="">Select a Year...</option>
+                {Array.from({ length: 2024 - 1885 }, (_, i) => 2024 - i).map(year => (
+                  <option key={year} value={year}>{year}</option>
+                ))}
+              </select>
               <label htmlFor="year">Year</label>
             </div>
             <div className="form-floating mb-3">
               <input onChange={handleVinChange} value={vin} placeholder="Vin" type="text" min="1" maxLength={17} name="vin" id="vin" className="form-control" />
               <label htmlFor="vin">Vin</label>
-            </div>
-            <div className="form-floating mb-3">
-              <input onChange={handleSoldChange} value={sold} placeholder="Sold" required type="text" name="sold" id="sold" className="form-control" />
-              <label htmlFor="sold">Sold</label>
             </div>
             <div className="form-floating mb-3">
               <select onChange={handleModelChange} value={model} required name="model" id="model" className="form-select">
@@ -106,6 +106,14 @@ function AutomobileForm() {
                   )
                 })}
               </select>
+            </div>
+            <div className="form-floating mb-3">
+              <select onChange={handleSoldChange} value={sold} required name="sold" id="sold" className="form-select">
+                <option value="">Select...</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
+              <label htmlFor="sold">Sold</label>
             </div>
             <button className="btn btn-primary">Create</button>
           </form>

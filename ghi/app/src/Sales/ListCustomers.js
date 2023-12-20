@@ -14,6 +14,15 @@ function ListCustomers() {
     }
   }
 
+  function formatPhoneNumber(phoneNumberString) {
+    const cleaned = ('' + phoneNumberString).replace(/\D/g, '');
+    const match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
+    if (match) {
+      return '(' + match[1] + ') ' + match[2] + '-' + match[3];
+    }
+    return null;
+  }
+
   useEffect(() => {
     loadCustomers();
   }, []);
@@ -36,7 +45,7 @@ function ListCustomers() {
               <tr key={customer.id}>
                 <td>{customer.first_name}</td>
                 <td>{customer.last_name}</td>
-                <td>{customer.phone_number} </td>
+                <td>{formatPhoneNumber(customer.phone_number)}</td>
                 <td>{customer.address}</td>
               </tr>
             );
