@@ -51,7 +51,9 @@ function CustomerForm() {
     }
 
     const handlePhoneNumberChange = (event) => {
-        const value = event.target.value;
+        let value = event.target.value;
+        value = value.replace(/\D/g, "");
+        value = value.replace(/^(\d{3})(\d{3})(\d{4})$/, "($1) $2-$3");
         setPhoneNumber(value);
     }
 
@@ -74,7 +76,7 @@ function CustomerForm() {
                             <label htmlFor="address">Address..</label>
                         </div>
                         <div className="form-floating mb-3">
-                            <input value={phoneNumber} onChange={handlePhoneNumberChange} placeholder="Phone Number" required type="number" name="text" id="text" className="form-control" />
+                            <input value={phoneNumber} onChange={handlePhoneNumberChange} placeholder="Phone Number" required type="text" name="text" id="text" className="form-control" />
                             <label htmlFor="address">Phone Number..</label>
                         </div>
                         <button className="btn btn-primary">Create</button>

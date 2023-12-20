@@ -41,7 +41,7 @@ function AutomobilesList() {
                                 <td>{auto.year}</td>
                                 <td>{auto.model.name}</td>
                                 <td>{auto.model.manufacturer.name}</td>
-                                <td><input type="checkbox" checked={auto.sold} readOnly /></td>
+                                <td>{auto.sold ? "Yes" : "No"}</td>
                             </tr>
                         )
                     })}

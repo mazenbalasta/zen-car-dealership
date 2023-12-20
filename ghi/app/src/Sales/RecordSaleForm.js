@@ -132,9 +132,9 @@ function SalesRecordForm() {
                 })}
               </select>
             </div>
-            <div className="form-floating mb-3">
+            <div className="input-group mb-3">
+            <span className="input-group-text">$</span>
               <input value={price} onChange={handlePriceChange} required placeholder="Price" type="number" min="0" name="employee_id" id="price" className="form-control" />
-              <label htmlFor="address">0</label>
             </div>
             <button className="btn btn-primary">Create</button>
           </form>
