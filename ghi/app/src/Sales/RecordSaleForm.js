@@ -65,6 +65,19 @@ function SalesRecordForm() {
       const sale = await fetch(salesUrl, fetchConfig);
       if (sale.ok) {
         const newSale = await sale.json();
+        alert(`Sale ${newSale.id} was successfully recorded.`);
+        const updateUrl = `http://localhost:8100/api/automobiles/${automobile}/`;
+        const updateConfig = {
+          method: 'put',
+          body: JSON.stringify({ sold: true }),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        };
+        const updateResponse = await fetch(updateUrl, updateConfig);
+        if (!updateResponse.ok) {
+          console.error(updateResponse);
+        }
         setPrice('');
         setAutomobile('');
         setSalesPerson('');
@@ -133,7 +146,7 @@ function SalesRecordForm() {
               </select>
             </div>
             <div className="input-group mb-3">
-            <span className="input-group-text">$</span>
+              <span className="input-group-text">$</span>
               <input value={price} onChange={handlePriceChange} required placeholder="Price" type="number" min="0" name="employee_id" id="price" className="form-control" />
             </div>
             <button className="btn btn-primary">Create</button>
