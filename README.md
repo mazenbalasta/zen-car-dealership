@@ -27,6 +27,17 @@ Polling Services: The backend also includes a polling service for each microserv
 
 The design of this project allows for high scalability and maintainability, as each microservice can be developed, deployed, and scaled independently.
 
+## Installation
+
+1. Fork and clone the repository at https://gitlab.com/sjp19-public-resources/sjp-2022-april/project-beta
+2. Run the following commands on your computer
+```
+docker volume create beta-data
+docker-compose build
+docker-compose up
+```
+3. When you run docker-compose up and if you're on macOS, you will see a warning about an environment variable named OS being missing. You can safely ignore this.
+
 ## Disclaimer
 
 This application loads with an empty database. To fully interact with this application, please create at least one of the following in this order:
