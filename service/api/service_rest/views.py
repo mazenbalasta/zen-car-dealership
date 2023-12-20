@@ -5,14 +5,11 @@ import json
 from common.json import ModelEncoder
 from .models import AutomobileVO, Technician, Appointment
 
+
 class TechnicianListEncoder(ModelEncoder):
     model = Technician
-    properties = [
-        "employee_id",
-        "first_name",
-        "last_name",
-        "id"
-    ]
+    properties = ["employee_id", "first_name", "last_name", "id"]
+
 
 class TechnicianDetailEncoder(ModelEncoder):
     model = Technician
@@ -22,36 +19,27 @@ class TechnicianDetailEncoder(ModelEncoder):
         "last_name",
     ]
 
+
 class AppointmentListEncoder(ModelEncoder):
     model = Appointment
-    properties = [
-        "vin",
-        "customer",
-        "date_time",
-        "technician",
-        "reason",
-        "id"
-    ]
+    properties = ["vin", "customer", "date_time", "technician", "reason", "id"]
     encoders = {
         "technician": TechnicianDetailEncoder(),
     }
+
     def get_extra_data(self, o):
-        return { "status": o.status.name }
+        return {"status": o.status.name}
+
 
 class AppointmentDetailEncoder(ModelEncoder):
     model = Appointment
-    properties = [
-        "vin",
-        "customer",
-        "date_time",
-        "technician",
-        "reason"
-    ]
+    properties = ["vin", "customer", "date_time", "technician", "reason"]
     encoders = {
         "technician": TechnicianDetailEncoder(),
     }
+
     def get_extra_data(self, o):
-        return { "status": o.status.name }
+        return {"status": o.status.name}
 
 
 @require_http_methods(["GET", "POST"])
@@ -65,21 +53,14 @@ def list_technicians(request):
     else:
         content = json.loads(request.body)
         technician = Technician.objects.create(**content)
-        return JsonResponse(
-            technician,
-            encoder=TechnicianListEncoder,
-            safe=False
-            )
+        return JsonResponse(technician, encoder=TechnicianListEncoder, safe=False)
+
 
 @require_http_methods(["GET", "DELETE"])
 def show_technician(request, id):
     if request.method == "GET":
         technician = Technician.objects.get(id=id)
-        return JsonResponse(
-            technician,
-            encoder=TechnicianDetailEncoder,
-            safe=False
-        )
+        return JsonResponse(technician, encoder=TechnicianDetailEncoder, safe=False)
     else:
         count, _ = Technician.objects.filter(id=id).delete()
         return JsonResponse({"deleted": count > 0})
@@ -105,21 +86,15 @@ def list_appointments(request):
             )
 
         appointment = Appointment.create(**content)
-        return JsonResponse(
-            appointment,
-            encoder=AppointmentListEncoder,
-            safe=False
-        )
+        return JsonResponse(appointment, encoder=AppointmentListEncoder, safe=False)
+
 
 @require_http_methods(["GET"])
 def show_appointment(request, id):
     if request.method == "GET":
         appointment = Appointment.objects.get(id=id)
-        return JsonResponse(
-            appointment,
-            encoder=AppointmentDetailEncoder,
-            safe=False
-        )
+        return JsonResponse(appointment, encoder=AppointmentDetailEncoder, safe=False)
+
 
 @require_http_methods(["PUT"])
 def cancel_appointment(request, id):
@@ -134,11 +109,8 @@ def cancel_appointment(request, id):
 
         appointment = Appointment.objects.get(id=id)
         appointment.cancel()
-        return JsonResponse(
-            appointment,
-            encoder=AppointmentDetailEncoder,
-            safe=False
-        )
+        return JsonResponse(appointment, encoder=AppointmentDetailEncoder, safe=False)
+
 
 @require_http_methods(["PUT"])
 def finish_appointment(request, id):
@@ -153,8 +125,4 @@ def finish_appointment(request, id):
 
         appointment = Appointment.objects.get(id=id)
         appointment.finish()
-        return JsonResponse(
-            appointment,
-            encoder=AppointmentDetailEncoder,
-            safe=False
-        )
+        return JsonResponse(appointment, encoder=AppointmentDetailEncoder, safe=False)
