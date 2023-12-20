@@ -29,7 +29,6 @@ function AutomobileForm() {
     data.color = color;
     data.year = year;
     data.vin = vin;
-    data.sold = sold;
     data.model_id = model;
 
     const automobileUrl = "http://localhost:8100/api/automobiles/";
@@ -48,7 +47,6 @@ function AutomobileForm() {
       setColor('');
       setYear('');
       setVin('');
-      setSold('');
       setModel('');
     };
   }
@@ -65,10 +63,7 @@ function AutomobileForm() {
     const value = event.target.value;
     setVin(value);
   }
-  const handleSoldChange = (event) => {
-    const value = event.target.value;
-    setSold(value);
-  }
+
   const handleModelChange = (event) => {
     const value = event.target.value;
     setModel(value);
