@@ -10,13 +10,13 @@
 
 The design of this project is based on a microservices architecture, where each microservice is responsible for a specific functionality of the application. This project allows for high scalability and maintainability, as each microservice can be developed, deployed, and scaled independently.
 
-### Frontend (React Application)
+### Frontend (React Application):
 
 ---
 
 The frontend of the application is built using React and is located in the [ghi/app](ghi/app) directory. It provides a user interface for interacting with the backend services. The frontend communicates with the backend services through HTTP requests.
 
-### Backend (Microservices)
+### Backend (Microservices):
 
 ---
 
@@ -28,29 +28,29 @@ The backend of the application consists of three microservices: "Sales", "Invent
 
 - **_Service Microservice:_** Manages service appointments for automobiles. It provides API endpoints for creating, retrieving, updating, and deleting service appointments and technicians. The code for this service is located in the [service/api](service/api) directory.
 
-### Database
+### Database:
 
 ---
 
 Each microservice uses a PostgreSQL database for data storage. The database configuration for each service is located in the _settings.py_ file in the respective microservice's directory.
 
-### Docker
+### Docker:
 
 ---
 
 The microservices and the frontend application are containerized using Docker, and the services are orchestrated using Docker Compose. The Docker configuration for each service is located in the _Dockerfile.dev_ file in the respective service's directory, and the Docker Compose configuration is located in the [docker-compose.yml](docker-compose.yml) file at the root of the project.
 
-### Polling Services
+### Polling Services:
 
 ---
 
 The backend also includes a polling service for each microservice, located in the _poll_ directory of the respective microservice's directory. The polling services are responsible for periodically checking for updates in the microservices and synchronizing the data between them.
 
-## Diagram
+## Diagram:
 
 ![Diagram](image-2.png)
 
-## **Installation**
+## **Installation:**
 
 **1.** Fork and clone the repository at https://gitlab.com/sjp19-public-resources/sjp-2022-april/project-beta
 
@@ -64,7 +64,7 @@ docker-compose up
 
 **3.** When you run `docker-compose up` and if you're on macOS, you will see a warning about an environment variable named OS being missing. You can safely ignore this.
 
-## **Disclaimer**
+## **Disclaimer:**
 
 This application loads with an empty database. To fully interact with this application, please create at least one of the following in this order:
 
@@ -79,7 +79,7 @@ This application loads with an empty database. To fully interact with this appli
 
 # **Service microservice**
 
-## **Description**
+## **Description:**
 
 The Service microservice is responsible for managing service appointments for automobiles. It also has a poller in place that fetches data from our Inventory Automobiles that automatically updates the `AutomobileVO` Model with the VINs of all the automobile we've ever had in stock and it's sold status, either true (automobile is sold) or false(automobile is still in stock). It consists of several models defined in the [service/api/service_rest/models.py](service/api/service_rest/models.py) file:
 
@@ -88,7 +88,7 @@ The Service microservice is responsible for managing service appointments for au
 - **_`Appointment`_**
 - **_`Status`_**
 
-## **Models**
+## **Models:**
 
 There are the four models included in the service microservice along with their functionalities:
 
@@ -100,9 +100,9 @@ There are the four models included in the service microservice along with their 
 
 - **_`Status`_:** the `Status` model represents different states or conditions that an Appointment can have. It's a common practice to use a separate model for representing status, especially when the status can be a finite set of values and might have associated behaviors or meanings. This Status model has a single field, `name`, which is a character field with a maximum length of 10 characters. The `name` field is meant to store the actual status of the Appointment, such as "created," "finished," "cancelled".
 
-## **URLs**
+## **URLs:**
 
-### **_Technician_**
+### **_Technician_:**
 
 ---
 
@@ -176,7 +176,7 @@ Example bad request:
 }
 ```
 
-### **_Appointment_**
+### **_Appointment_:**
 
 ---
 
@@ -271,7 +271,7 @@ Example:
 
 - **SET APPOINTMENT STATUS TO "CANCELLED":** A `PUT` request that requires no body. Sending this request will change the status of appointment to finished. replace <id:pk> with id of appointment you want to cancel. Response will show the same data as Appointment Detail except the status will be changed to "cancelled".
 
-### **_AutomobileVO_**
+### **_AutomobileVO_:**
 
 ---
 
