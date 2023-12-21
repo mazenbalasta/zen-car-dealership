@@ -15,7 +15,7 @@ function ServiceAppointmentList() {
       setAppointments(data.appointments);
     }
 
-    const automobileResponse = await fetch('http://localhost:8100/api/automobiles/');
+    const automobileResponse = await fetch('http://localhost:8080/api/automobiles/');
     if (automobileResponse.ok) {
       const automobiles = await automobileResponse.json();
       setAutomobiles(automobiles.autos);

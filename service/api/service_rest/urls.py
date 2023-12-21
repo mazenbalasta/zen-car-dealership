@@ -40,7 +40,7 @@ urlpatterns = [
          name="finish_appointment"
     ),
     path(
-        "autos/",
+        "automobiles/",
         list_automobile,
         name="list_automobile"
     ),

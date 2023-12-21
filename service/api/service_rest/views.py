@@ -58,7 +58,7 @@ def list_appointments(request):
             content["technician"] = technician
         except Technician.DoesNotExist:
             return JsonResponse(
-                {"message": "Invalid technician id"},
+                {"message": "Invalid technician id, please ensure the technician key has an existing value"},
                 status=400,
             )
 
@@ -86,7 +86,7 @@ def cancel_appointment(request, id):
             appointment = Appointment.objects.get(id=id)
         except Appointment.DoesNotExist:
             return JsonResponse(
-                {"message": "Invalid appointment id"},
+                {"message": "Invalid appointment id, please ensure the url contains an existing appointment id"},
                 status=400,
             )
 
@@ -105,7 +105,7 @@ def finish_appointment(request, id):
             appointment = Appointment.objects.get(id=id)
         except Appointment.DoesNotExist:
             return JsonResponse(
-                {"message": "Invalid appointment id"},
+                {"message": "Invalid appointment id, please ensure the url contains an existing appointment id"},
                 status=400,
             )
 

@@ -13,6 +13,7 @@ const InitForm = {
 function NewServiceAppointmentForm() {
   const [technicians, setTechnicians] = useState([]);
   const [formData, setFormData] = useState({ ...InitForm })
+  const [automobiles, setAutomobiles] = useState([]);
   const navigate = useNavigate();
 
   const fetchData = async () => {
@@ -23,15 +24,31 @@ function NewServiceAppointmentForm() {
       const data = await response.json();
       setTechnicians(data.technicians);
     }
+
+    const automobileResponse = await fetch('http://localhost:8080/api/automobiles/');
+    if (automobileResponse.ok) {
+      const automobiles = await automobileResponse.json();
+      setAutomobiles(automobiles.autos);
+    }
+
   }
 
   useEffect(() => {
     fetchData();
   }, []);
 
+  const isVip = (vin) => {
+    const autosVin = automobiles.map(auto => auto.vin);
+    return autosVin.includes(vin);
+  };
+
   const handleInputChange = (e) => {
     const inputName = e.target.name;
     const value = e.target.value;
+
+    if (inputName === 'vin') {
+        isVip(value);
+      }
 
     if (inputName === 'date' || inputName === 'time') {
       setFormData({
@@ -89,6 +106,25 @@ function NewServiceAppointmentForm() {
               <input onChange={handleInputChange} value={formData.vin} required type="text" name="vin" id="vin" className="form-control" />
               <label htmlFor="vin">Automobile VIN</label>
             </div>
+
+            {formData.vin !== "" && (
+            <div>
+                {isVip(formData.vin) ? (
+                  <p style={{
+                    color: 'white',
+                    background: "#198754",
+                    fontWeight: 'bold',
+                    textAlign: "center"
+                }}>VIN entered is VIP!</p>
+                ) : (
+                  <p style={{
+                    color: 'red',
+                    textAlign: "center"
+                }}>VIN entered is not VIP.</p>
+                )}
+            </div>
+            )}
+
             <div className="form-floating mb-3">
               <input onChange={handleInputChange} value={formData.customer} required type="text" name="customer" id="customer" className="form-control" />
               <label htmlFor="customer">Customer</label>
