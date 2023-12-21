@@ -27,6 +27,7 @@ Polling Services: The backend also includes a polling service for each microserv
 
 The design of this project allows for high scalability and maintainability, as each microservice can be developed, deployed, and scaled independently.
 
+![Diagram](image.png)
 ## Installation
 
 1. Fork and clone the repository at https://gitlab.com/sjp19-public-resources/sjp-2022-april/project-beta
