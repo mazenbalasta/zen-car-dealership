@@ -54,8 +54,212 @@ This application loads with an empty database. To fully interact with this appli
 ## Service microservice
 
 **Description**
-The Service microservice is responsible for managing service appointments for automobiles. It consists of several models defined in the service/api/service_rest/models.py file:
+The Service microservice is responsible for managing service appointments for automobiles. It also has a poller in place that fetches data from our Inventory Automobiles that automatically updates the AutomobileVO Model with the VINs of all the automobile we've ever had in sctock and it's sold status, either true (automobile is sold) or false(automobile is still in stock). It consists of several models defined in the service/api/service_rest/models.py file:
 
+- AutomobileVO
+- Technician
+- Appointment
+- Status
+
+**Models:**
+
+Here are the four models included in the service microservice along with their functionalies:
+
+- AutomobileVO: This model represents an automobile in the inventory. It has a vin field for the Vehicle Identification Number, which is unique for each automobile, and a sold field to indicate whether the automobile has been sold. These fields are polled from our inventory microservice using a poller that fetches data evey 60 seconds. These fields are only a mirror of the Inventory Automobile model which means we will not be editing it within the Service Microservice. Only a Get request for the list of automobiles is provided.
+
+- Technician: This model represents a technicain employed. It has a first_name field for the technician's first name, a last_name field for the technicians last name, and an employee_id field for the technicians employee_id (this is different from the Model's id).
+
+- Appointment: This model represents a service appointment. It has fields for the date and time of the appointment (date_time), the reason for the appointment (reason), the VIN of the automobile being serviced (vin), and the customer’s name (customer). It also has a foreign key to the Technician model (technician) and a foreign key to the Status model (status).
+
+- Status: the Status model represents different states or conditions that an Appointment can have. It's a common practice to use a separate model for representing status, especially when the status can be a finite set of values and might have associated behaviors or meanings. This Status model has a single field name, which is a character field with a maximum length of 10 characters. The name field is meant to store the actual status of the Appointment, such as "created," "finished," "cancelled".
+
+### URLs
+***Technician***
+
+| Action | Method | URL
+| ----------- | ----------- | ----------- |
+| List technicians | GET | http://localhost:8080/api/technicians/
+| Technician detail | GET | http://localhost:8080/api/technicians/<int:pk>/
+| Create a technician | POST | http://localhost:8080/api/technicians/
+| Delete a technician | DELETE | http://localhost:8080/api/technicians/<int:pk>/
+
+LIST TECHNICIANS: This will provide you the list of all emplyed technicians. A Get request requires no body.
+
+Here's an example of what the returned data will look like:
+
+```
+"technicians": [
+		{
+			"href": "/api/technicians/1/",
+			"employee_id": "Emp12345",
+			"first_name": "John",
+			"last_name": "Doe",
+			"id": 1
+		},
+		{
+			"href": "/api/technicians/2/",
+			"employee_id": "0212225",
+			"first_name": "Susan ",
+			"last_name": "Wheeler",
+			"id": 2
+		},
+```
+
+TECHNICIAN DETAIL: Another Get request. Will provide the same information as List technician but for individual technicians. Replace <int:pk> with the technicians id number. If the id number provided does not exist, you will get a 400 status meaning it was a bad request and this message will be returned:
+
+```
+Example bad request:
+{
+	"message": "Invalid technician ID, please ensure url has an existing technician id"
+}
+```
+
+CREATE A TECHNICIAN: This is a post request which means you'll need to include a jason body that consists of relevant information to create a Technician.
+
+Here is what you'll need to create a technician just fill in the "":
+
+```
+{
+	"employee_id": "",
+	"first_name": "",
+	"last_name": ""
+}
+```
+
+DELETE TECHNICIAN: All you'll need to send is a delete request along with the technicians model id. A status 200 (delete successfull) of a status 400 (delete unsuccessfull) will be returned depending if the provided id exist or not.
+
+Here are examples of good and bad requests:
+
+```
+{
+	"deleted": true,
+	"message": "Technician deleted successfully"
+}
+```
+```
+{
+	"deleted": false,
+	"message": "Technician not found"
+}
+```
+
+***Appointment***
+
+| Action | Method | URL
+| ----------- | ----------- | ----------- |
+| List appointments | GET | http://localhost:8080/api/appointments/
+| Appointment detail | GET | http://localhost:8080/api/appointments/<int:pk>/
+| Create an appointment | POST | http://localhost:8080/api/appointments/
+| Delete an appointment | DELETE | http://localhost:8080/api/appontments/<int:pk>/
+| Set appointment status to "finished" | DELETE | http://localhost:8080/api/appointments/<int:pk>/
+| Set appointment status to "cancelled" | DELETE | http://localhost:8080/api/appointments/<int:pk>/
+
+LIST APPOINTMENTS: Another Get request, this will return the following list of appointments response:
+
+```
+Example:
+{
+	"appointments": [
+		{
+			"href": "/api/appointments/6/",
+			"vin": "Test",
+			"customer": "Test",
+			"date_time": "2023-01-15T10:30:00",
+			"technician": {
+				"href": "/api/technicians/1/",
+				"employee_id": "Emp12345",
+				"first_name": "John",
+				"last_name": "Doe"
+			},
+			"reason": "test",
+			"id": 6,
+			"status": "finished"
+		},
+		{
+			"href": "/api/appointments/7/",
+			"vin": "Test",
+			"customer": "Test",
+			"date_time": "2023-01-15T10:30:00",
+			"technician": {
+				"href": "/api/technicians/1/",
+				"employee_id": "Emp12345",
+				"first_name": "John",
+				"last_name": "Doe"
+			},
+			"reason": "test",
+			"id": 7,
+			"status": "finished"
+		},
+  ]
+}
+```
+The technician object represents the technician assigned to this appointment.
+
+APPOINTMENT DETAIL: this will show the same response but for specific appointments. Replace <int:pk> with Model id of the appointment you want to show.
+
+CREATE AN APPOINTMENT: Will require a body.
+
+Replace the following "" with craete values. Technician field will be a number and not a string that represents the id of technician you want assigned to this appointment and date_time field will be a string in this format "YYYY-MM-DDTHH:MM:SS":
+
+```
+Example:
+{
+	"vin": "",
+	"customer": "",
+	"date_time": "2023-12-22T10:30:00",
+	"technician": ,
+	"reason": ""
+}
+```
+
+DELETE AN APPOINTMENT: Delete request, no body needed. Provide url with id of appointment you want to delete. A status 200 (delete successfull) of a status 400 (delete unsuccessfull) will be returned depending in the provided id exist or not.
+
+Here are examples of good and bad requests:
+
+```
+{
+	"deleted": true,
+	"message": "Appointment deleted successfully"
+}
+```
+```
+{
+	"deleted": false,
+	"message": "Appointment not found"
+}
+```
+
+SET APPOINTMENT STATUS TO "FINISHED": A put request that requires no body. Sending this request will change the status of appointment to finished. replace <id:pk> with id of appointment you want to finish. Response will show the same data as Appointment Detail except the status will be changed to "finished".
+
+SET APPOINTMENT STATUS TO "CANCELLED": A put request that requires no body. Sending this request will change the status of appointment to finished. replace <id:pk> with id of appointment you want to cancel. Response will show the same data as Appointment Detail except the status will be changed to "cancelled".
+
+**AutomobileVO**
+
+| Action | Method | URL
+| ----------- | ----------- | ----------- |
+| List automobiles | GET | http://localhost:8080/api/automobiles/
+
+LIST AUTOMOBILES: A Get request that returns a response containing all the VINs of Inventory Automobiles along with their sold status.
+
+```
+Example:
+{
+	"autos": [
+		{
+			"vin": "SampleVin12345",
+			"sold": false
+		},
+		{
+			"vin": "1C3CC5FB2AN120174",
+			"sold": true
+		},
+		{
+			"vin": "5TDZT34A65S248163",
+			"sold": false
+		}
+	]
+}
+```
 
 ## Sales microservice
 
