@@ -37,7 +37,7 @@ function TechnicianList() {
         <tbody>
           {technicians.map(technician => {
             return (
-              <tr key={technician.employee_id}>
+              <tr key={technician.id}>
                 <td>{technician.first_name}</td>
                 <td>{technician.last_name}</td>
                 <td>{technician.employee_id}</td>

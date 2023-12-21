@@ -32,19 +32,36 @@ function ServiceHistory() {
     return autosVin.includes(vin);
   };
 
-  const searchResult = appointments.filter((appointment) => appointment.vin.includes(searchParam));
+  const handleSearch = (e) => {
+    e.preventDefault();
+
+    if (searchParam === '') {
+      getData();
+    } else {
+      const filteredAppointments = appointments.filter(appointment =>
+        appointment.vin.includes(searchParam)
+      );
+      setAppointments(filteredAppointments);
+    }
+  };
+
 
   return (
     <>
       <h1>Service History</h1>
-      <div className="mb-3">
-        <input type="text" id="search"
-          className="form-control"
-          placeholder='Search by Vin...'
-          value={searchParam}
-          onChange={(e) => setSearchParam(e.target.value)}
-        />
+      <form onSubmit={handleSearch}>
+        <div className="mb-3">
+          <input
+            type="text"
+            id="search"
+            className="form-control"
+            placeholder='Search by Vin...'
+            value={searchParam}
+            onChange={(e) => setSearchParam(e.target.value)}
+          />
+        <button type="submit" className="btn btn-primary mt-3">Search</button>
       </div>
+      </form>
       <table className="table table-striped">
         <thead>
           <tr className="table-success">
@@ -59,7 +76,7 @@ function ServiceHistory() {
           </tr>
         </thead>
         <tbody>
-          {searchResult.map(appointment => {
+          {appointments.map(appointment => {
             const { formattedDate, formattedTime } = formatDateTime(appointment.date_time);
             const technicianFullName = `${appointment.technician.first_name} ${appointment.technician.last_name}`;
             return (
