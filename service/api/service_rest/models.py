@@ -1,9 +1,11 @@
 from django.db import models
 from django.urls import reverse
 
+
 class AutomobileVO(models.Model):
     vin = models.CharField(max_length=200)
     sold = models.BooleanField(default=False)
+
 
 class Status(models.Model):
     name = models.CharField(max_length=10)
@@ -15,6 +17,7 @@ class Status(models.Model):
         ordering = ("id",)
         verbose_name_plural = "statuses"
 
+
 class Technician(models.Model):
     first_name = models.CharField(max_length=200)
     last_name = models.CharField(max_length=200)
@@ -22,6 +25,7 @@ class Technician(models.Model):
 
     def get_api_url(self):
         return reverse("show_technician", kwargs={"id": self.id})
+
 
 class Appointment(models.Model):
     date_time = models.DateTimeField()
@@ -35,9 +39,10 @@ class Appointment(models.Model):
     )
     status = models.ForeignKey(
         Status,
-        related_name = "appointments",
+        related_name="appointments",
         on_delete=models.PROTECT,
     )
+
     def get_api_url(self):
         return reverse("show_appointment", kwargs={"id": self.id})
 

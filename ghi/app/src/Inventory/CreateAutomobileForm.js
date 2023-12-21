@@ -29,7 +29,6 @@ function AutomobileForm() {
     data.color = color;
     data.year = year;
     data.vin = vin;
-    data.sold = sold;
     data.model_id = model;
 
     const automobileUrl = "http://localhost:8100/api/automobiles/";
@@ -48,7 +47,6 @@ function AutomobileForm() {
       setColor('');
       setYear('');
       setVin('');
-      setSold('');
       setModel('');
     };
   }
@@ -65,10 +63,7 @@ function AutomobileForm() {
     const value = event.target.value;
     setVin(value);
   }
-  const handleSoldChange = (event) => {
-    const value = event.target.value;
-    setSold(value);
-  }
+
   const handleModelChange = (event) => {
     const value = event.target.value;
     setModel(value);
@@ -106,14 +101,6 @@ function AutomobileForm() {
                   )
                 })}
               </select>
-            </div>
-            <div className="form-floating mb-3">
-              <select onChange={handleSoldChange} value={sold} required name="sold" id="sold" className="form-select">
-                <option value="">Select...</option>
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
-              </select>
-              <label htmlFor="sold">Sold</label>
             </div>
             <button className="btn btn-primary">Create</button>
           </form>

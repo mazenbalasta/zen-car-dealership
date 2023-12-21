@@ -10,14 +10,12 @@ from .views import (
 )
 
 urlpatterns = [
+    path("technicians/", list_technicians, name="list_technicians"),
+    path("technicians/<int:id>/", show_technician, name="show_technician"),
+    path("appointments/", list_appointments, name="list_appointments"),
+    path("appointments/<int:id>/", show_appointment, name="show_appointment"),
     path(
-        "technicians/",
-         list_technicians,
-         name="list_technicians"
-    ),
-    path("technicians/<int:id>/",
-         show_technician,
-         name="show_technician"
+        "appointments/<int:id>/cancel/", cancel_appointment, name="cancel_appointment"
     ),
     path(
         "appointments/",

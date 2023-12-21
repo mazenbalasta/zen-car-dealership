@@ -36,8 +36,6 @@ function ListAllSales() {
     loadSalesData();
   }, [selectedSalesperson]);
 
-  const [searchParam, setSearchParam] = useState('');
-
   return (
     <>
       <h1>Sales</h1>
@@ -67,7 +65,7 @@ function ListAllSales() {
                 <td>{sales.sales_person.first_name} {sales.sales_person.last_name}</td>
                 <td>{sales.customer.first_name} {sales.customer.last_name}</td>
                 <td>{sales.automobile.vin}</td>
-                <td>${Number(sales.price).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+                <td>${Number(sales.price).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
               </tr>
             );
           })}

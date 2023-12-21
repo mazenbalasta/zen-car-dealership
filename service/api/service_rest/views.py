@@ -23,21 +23,14 @@ def list_technicians(request):
     else:
         content = json.loads(request.body)
         technician = Technician.objects.create(**content)
-        return JsonResponse(
-            technician,
-            encoder=TechnicianListEncoder,
-            safe=False
-            )
+        return JsonResponse(technician, encoder=TechnicianListEncoder, safe=False)
+
 
 @require_http_methods(["GET", "DELETE"])
 def show_technician(request, id):
     if request.method == "GET":
         technician = Technician.objects.get(id=id)
-        return JsonResponse(
-            technician,
-            encoder=TechnicianDetailEncoder,
-            safe=False
-        )
+        return JsonResponse(technician, encoder=TechnicianDetailEncoder, safe=False)
     else:
         count, _ = Technician.objects.filter(id=id).delete()
         return JsonResponse({"deleted": count > 0})
@@ -63,21 +56,15 @@ def list_appointments(request):
             )
 
         appointment = Appointment.create(**content)
-        return JsonResponse(
-            appointment,
-            encoder=AppointmentListEncoder,
-            safe=False
-        )
+        return JsonResponse(appointment, encoder=AppointmentListEncoder, safe=False)
+
 
 @require_http_methods(["GET"])
 def show_appointment(request, id):
     if request.method == "GET":
         appointment = Appointment.objects.get(id=id)
-        return JsonResponse(
-            appointment,
-            encoder=AppointmentDetailEncoder,
-            safe=False
-        )
+        return JsonResponse(appointment, encoder=AppointmentDetailEncoder, safe=False)
+
 
 @require_http_methods(["PUT"])
 def cancel_appointment(request, id):
@@ -92,11 +79,8 @@ def cancel_appointment(request, id):
 
         appointment = Appointment.objects.get(id=id)
         appointment.cancel()
-        return JsonResponse(
-            appointment,
-            encoder=AppointmentDetailEncoder,
-            safe=False
-        )
+        return JsonResponse(appointment, encoder=AppointmentDetailEncoder, safe=False)
+
 
 @require_http_methods(["PUT"])
 def finish_appointment(request, id):
