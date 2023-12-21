@@ -29,11 +29,28 @@ def list_technicians(request):
 @require_http_methods(["GET", "DELETE"])
 def show_technician(request, id):
     if request.method == "GET":
-        technician = Technician.objects.get(id=id)
+        try:
+            technician = Technician.objects.get(id=id)
+        except Technician.DoesNotExist:
+            return JsonResponse(
+                {"message": "Invalid technician ID, please ensure url has an existing technician id"},
+                status=400
+            )
         return JsonResponse(technician, encoder=TechnicianDetailEncoder, safe=False)
     else:
         count, _ = Technician.objects.filter(id=id).delete()
-        return JsonResponse({"deleted": count > 0})
+        if count > 0:
+            return JsonResponse({
+                "deleted": True,
+                "message": "Technician deleted successfully"
+            })
+        else:
+            return JsonResponse({
+                "deleted": False,
+                "message": "Technician not found"
+                },
+                status=400
+            )
 
 
 @require_http_methods(["GET", "POST"])
@@ -54,16 +71,29 @@ def list_appointments(request):
                 {"message": "Invalid technician id, please ensure the technician key has an existing value"},
                 status=400,
             )
-
         appointment = Appointment.create(**content)
         return JsonResponse(appointment, encoder=AppointmentListEncoder, safe=False)
 
 
-@require_http_methods(["GET"])
+@require_http_methods(["GET", "DELETE"])
 def show_appointment(request, id):
     if request.method == "GET":
         appointment = Appointment.objects.get(id=id)
         return JsonResponse(appointment, encoder=AppointmentDetailEncoder, safe=False)
+    else:
+        count, _ = Appointment.objects.filter(id=id).delete()
+        if count > 0:
+            return JsonResponse({
+                "deleted": True,
+                "message": "Appointment deleted successfully"
+            })
+        else:
+            return JsonResponse({
+                "deleted": False,
+                "message": "Appointment not found"
+                },
+                status=400
+            )
 
 
 @require_http_methods(["PUT"])
