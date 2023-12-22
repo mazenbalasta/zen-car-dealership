@@ -66,7 +66,7 @@ function NewTechnicianForm() {
             <div className="form-floating mb-3">
               <input onChange={handleInputChange} value={formData.employee_id} placeholder="Employee ID" required type="text" name="employee_id" id="employee_id" className="form-control" autoComplete="off" />
               <label htmlFor="employee_id">Employee ID</label>
-            </div>Ï
+            </div>
             <button className="btn btn-primary">Create</button>
           </form>
         </div>
