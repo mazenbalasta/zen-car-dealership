@@ -8,7 +8,7 @@
 
 ## **Design**
 
-The design of this project is based on a microservices architecture, where each microservice is responsible for a specific functionality of the application. This project allows for high scalability and maintainability, as each microservice can be developed, deployed, and scaled independently.
+The design of the project is based on a microservices architecture, where each microservice is responsible for a specific functionality of the application. This project allows for high scalability and maintainability, as each microservice can be developed, deployed, and scaled independently.
 
 ### Frontend (React Application):
 
@@ -81,7 +81,7 @@ This application loads with an empty database. To fully interact with this appli
 
 ## **Description:**
 
-The Service microservice is responsible for managing service appointments for automobiles. It also has a poller in place that fetches data from our Inventory Automobiles that automatically updates the `AutomobileVO` Model with the VINs of all the automobile we've ever had in stock and it's sold status, either true (automobile is sold) or false(automobile is still in stock). It consists of several models defined in the [service/api/service_rest/models.py](service/api/service_rest/models.py) file:
+The Service microservice is responsible for managing service appointments for automobiles. It also has a poller in place that fetches data from the Inventory Automobiles that automatically updates the `AutomobileVO` Model with the VINs of all the automobile we've ever had in stock and it's sold status, either true (automobile is sold) or false(automobile is still in stock). It consists of several models defined in the [service/api/service_rest/models.py](service/api/service_rest/models.py) file:
 
 - **_`AutomobileVO`_**
 - **_`Technician`_**
@@ -313,7 +313,7 @@ The Sales microservice also exposes several API endpoints for creating, retrievi
 
 ## **Models:**
 
-The Sales microservice in the application is primarily responsible for managing sales-related data. It consists of several models defined in the [sales/api/sales_rest/models.py](sales/api/sales_rest/models.py) file:
+The Sales microservice in this application is primarily responsible for managing sales-related data. It consists of several models defined in the [sales/api/sales_rest/models.py](sales/api/sales_rest/models.py) file:
 
 - **_`AutomobileVO`_**: This model represents an automobile in the inventory. It has a `vin` field for the Vehicle Identification Number, which is unique for each automobile, and a `sold` field to indicate whether the automobile has been sold.
 
@@ -374,7 +374,7 @@ The Sales microservice in the application is primarily responsible for managing 
 
 # **Inventory microservice**
 
-The Inventory microservice in your application is primarily responsible for managing the inventory of automobiles. It consists of several models defined in the [inventory/api/inventory_rest/models.py](inventory/api/inventory_rest/models.py) file:
+The Inventory microservice in this application is primarily responsible for managing the inventory of automobiles. It consists of several models defined in the [inventory/api/inventory_rest/models.py](inventory/api/inventory_rest/models.py) file:
 
 - **_`Manufacturer`_:** This model represents a car manufacturer. It has a `name` field which is a unique string representing the name of the manufacturer.
 
