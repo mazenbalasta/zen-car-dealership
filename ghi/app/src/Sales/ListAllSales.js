@@ -39,7 +39,7 @@ function ListAllSales() {
   return (
     <>
       <h1>Sales</h1>
-      <select value={selectedSalesperson} onChange={(e) => setSelectedSalesperson(e.target.value)}>
+      <select id="salesperson" name="salesperson" value={selectedSalesperson} onChange={(e) => setSelectedSalesperson(e.target.value)}>
         <option value="">Select a salesperson...</option>
         {salespeople.map(salesperson => (
           <option key={salesperson.employee_id} value={salesperson.employee_id}>

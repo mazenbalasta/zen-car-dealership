@@ -49,7 +49,7 @@ function CreateManufacturerForm() {
                     <h1>Create a Vehicle Manufacturer</h1>
                     <form onSubmit={handleSubmit} id="add-automobile">
                         <div className="form-floating mb-3">
-                            <input onChange={handleInputChange} value={formData.name} placeholder="Manufacturer name" required type="text" name="name" id="name" className="form-control" />
+                            <input onChange={handleInputChange} value={formData.name} placeholder="Manufacturer name" required type="text" name="name" id="name" className="form-control" autoComplete="name" />
                             <label htmlFor="name">Manufacturer name</label>
                         </div>
                         <button className="btn btn-primary">Create</button>

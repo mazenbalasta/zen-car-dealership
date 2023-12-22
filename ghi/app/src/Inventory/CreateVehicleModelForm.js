@@ -58,7 +58,7 @@ function CreateVehicleModelForm() {
             } else {
                 window.alert('There was a problem creating the model');
             }
-        } else {window.alert('Creation cancelled')}
+        } else { window.alert('Creation cancelled') }
     };
 
     return (
@@ -68,15 +68,15 @@ function CreateVehicleModelForm() {
                     <h1>Create a Vehicle Model</h1>
                     <form onSubmit={handleSubmit} id="add-automobile">
                         <div className="form-floating mb-3">
-                            <input onChange={handleInputChange} value={formData.name} placeholder="Model name..." required type="text" name="name" id="name" className="form-control" />
+                            <input onChange={handleInputChange} value={formData.name} placeholder="Model name..." required type="text" name="name" id="name" className="form-control" autoComplete="name" />
                             <label htmlFor="name">Name</label>
                         </div>
                         <div className="form-floating mb-3">
-                            <input onChange={handleInputChange} value={formData.picture_url} placeholder="Picture URL..." required type="url" name="picture_url" id="picture_url" className="form-control" />
+                            <input onChange={handleInputChange} value={formData.picture_url} placeholder="Picture URL..." required type="url" name="picture_url" id="picture_url" className="form-control" autoComplete="url" />
                             <label htmlFor="picture_url">Picture URL</label>
                         </div>
                         <div className="form-floating mb-3">
-                            <select onChange={handleInputChange} value={formData.manufacturer_id} required name="manufacturer_id" id="manufacturer" className="form-select">
+                            <select onChange={handleInputChange} value={formData.manufacturer_id} required name="manufacturer_id" id="manufacturer" className="form-select" autoComplete="off">
                                 <option value="">Choose a Manufacturer...</option>
                                 {manufacturers.map(manufacturer => {
                                     return (
